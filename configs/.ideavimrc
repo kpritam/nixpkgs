@@ -1,0 +1,110 @@
+source ~/.config/nvim/init.lua
+
+set which-key
+let g:WhichKey_FontFamily="Fantasque Sans Mono"
+let g:WhichKey_FontSize = 18
+set notimeout
+" increase the timeoutlen (default: 1000)
+" set timeoutlen = 5000
+""" Map leader to space ---------------------
+let mapleader=" "
+
+""" Plugins  --------------------------------
+set surround
+set multiple-cursors
+set commentary
+set argtextobj
+set textobj-entire
+set ReplaceWithRegister
+
+""" Plugin settings -------------------------
+let g:argtextobj_pairs="[:],(:),<:>"
+
+""" Common settings -------------------------
+set showmode
+set so=5
+set incsearch
+set nu
+
+""" Idea specific settings ------------------
+set ideajoin
+set ideastatusicon=gray
+set idearefactormode=keep
+
+""" Mappings --------------------------------
+inoremap jk <Esc>
+
+map <leader>f <Action>(GotoFile)
+map <leader>e <Plug>(easymotion-f)
+
+map <leader>c <Action>(Stop)
+map <leader>z <Action>(ToggleDistractionFreeMode)
+
+map <leader>a <Action>(Annotate)
+map <leader>h <Action>(Vcs.ShowTabbedFileHistory)
+
+map <leader>b <Action>(ToggleLineBreakpoint)
+
+""" Splits manipulation
+nmap <leader>ws <Action>(SplitHorizontally)
+nmap <leader>wv <Action>(SplitVertically)
+nmap <leader>wc <Action>(Unsplit)
+" nmap <leader><leader> <Action>(VimFilePrevious)
+
+" To navigate between split panes
+nmap <c-n> <Action>(NextSplitter)
+nmap <c-p> <Action>(PrevSplitter)
+
+" Errors
+nmap <leader>x <Action>(GotoNextError)
+nmap <leader>X <Action>(GotoPreviousError)
+
+" Refactorings (LSP)
+vmap T <Action>(Refactorings.QuickListPopupAction)
+nmap <leader>lr <Action>(RenameElement)
+nmap <leader>lg <Action>(Generate)
+nmap <leader>lo <Action>(OptimizeImports)
+nmap <leader>lf <Action>(ReformatCode)
+" Building, Running and Debugging
+nmap <leader>cc <Action>(CompileDirty)
+nmap <leader>cr <Action>(Run)
+nmap <leader>cR <Action>(RunAnything)
+nmap <leader>cd <Action>(Debug)
+nmap <leader>cC <Action>(RunClass)
+nmap <leader>cD <Action>(DebugClass)
+nmap <leader>ct <Action>(RerunTests)
+nmap <leader>cT <Action>(RerunFailedTests)
+
+nmap <leader>r <Action>(Run)
+" scala
+nmap <leader>si <Action>(Scala.ShowImplicits)
+nmap <leader>sj <Action>(Scala.DecompileToJava)
+nmap <leader>sd <Action>(Scala.Desugar)
+nmap <leader>sc <Action>(Scala.GenerateCompanionObject)
+nmap <leader>ss <Action>(Scala.Sbt.CommandMenu)
+nmap <leader>sh <Action>(Scala.ToggleMethodChainInlayHints)
+nmap <leader>st <Action>(Scala.TypeInfo)
+nmap <leader>snc <Action>(Scala.NewClass)
+" scala worksheet
+nmap <leader>swn <Action>(Scala.NewScalaWorksheet)
+nmap <leader>sws <Action>(Scala.CreateLightWorksheetAction)
+nmap <leader>swr <Action>(Scala.RunWorksheet)
+
+" open
+nmap <leader>ot <Action>(ActivateTerminalToolWindow)
+map <leader>of <Action>(FileStructurePopup)
+
+nmap <leader>t <Action>(ActivateTerminalToolWindow)
+""" Goto commands
+nmap <leader>gf <Action>(GotoFile)
+nmap <leader><leader> <Action>(GotoFile)
+nmap <leader>gc <Action>(GotoClass)
+nmap <leader>ga <Action>(GotoAction)
+
+map <leader>/ <Action>(CommentByLineComment)
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=3
+
+" Do incremental searching.
+set incsearch

@@ -30,8 +30,8 @@ in
 
   programs.kitty.settings = {
     # https://fsd.it/shop/fonts/pragmatapro/
-    font_family = "PragmataPro Mono Liga";
-    font_size = "14.0";
+    font_family = "MonoLisa";
+    font_size = "17.0";
     adjust_line_height = "140%";
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
 
@@ -108,6 +108,18 @@ in
     # Set term colors based on value of `$term_backdround` when shell starts up.
     set-term-colors
   '';
+  programs.kitty.keybindings = {
+    "kitty_mod+t" = "new_tab_with_cwd";
+    "kitty_mod+enter" = "new_window_with_cwd";
+    "cmd+t" = "new_tab_with_cwd";
+    "cmd+enter" = "new_window_with_cwd";
+    "cmd+k" =
+      "combine : clear_terminal scrollback active : send_text normal x0c";
+    "ctrl+f" =
+      "launch --type=overlay --stdin-source=@screen_scrollback fzf --no-sort --no-mouse --exact -i";
+    "cmd+f" =
+      "launch --type=overlay --stdin-source=@screen_scrollback fzf --no-sort --no-mouse --exact -i";
+  };
   # }}}
 }
 # vim: foldmethod=marker

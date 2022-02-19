@@ -7,7 +7,7 @@
   programs.git.enable = true;
 
   programs.git.extraConfig = {
-    core.editor = "${pkgs.neovim-remote}/bin/nvr --remote-wait-silent -cc split";
+    core.editor = "lvim";
     diff.colorMoved = "default";
     pull.rebase = true;
   };

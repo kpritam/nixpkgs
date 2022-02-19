@@ -37,8 +37,15 @@ in
     "homebrew/cask-versions"
     "homebrew/core"
     "homebrew/services"
-    "nrlquaker/createzap"
+    "AdoptOpenJDK/openjdk"
+    "koekeishiya/formulae"
+    "coursier/formulas"
+    "d12frosted/emacs-plus"
   ];
+  
+  homebrew.extraConfig = ''
+    brew "emacs-plus@28", args:["with-xwidgets", "with-native-compe", "with-modern-purple-flat-icon", "with-no-titlebar"]
+  '';
 
   # Prefer installing application from the Mac App Store
   #
@@ -46,71 +53,79 @@ in
   # https://github.com/malob/nixpkgs/issues/9
   homebrew.masApps = {
     # "1Blocker" = 1365531024;
-    "1Password" = 1333542190;
-    "Accelerate for Safari" = 1459809092;
+    # "1Password" = 1333542190;
+    # "Accelerate for Safari" = 1459809092;
     # "Apple Configurator 2" = 1037126344;
-    DaisyDisk = 411643860;
-    "Dark Mode for Safari" = 1397180934;
-    Deliveries = 290986013;
-    Fantastical = 975937182;
+    # DaisyDisk = 411643860;
+    # "Dark Mode for Safari" = 1397180934;
+    # Deliveries = 290986013;
+    # Fantastical = 975937182;
     # "Gemini 2" = 1090488118;
     # "iMazing Profile Editor" = 1487860882;
-    Keynote = 409183694;
-    "LG Screen Manager" = 1142051783;
+    # Keynote = 409183694;
+    # "LG Screen Manager" = 1142051783;
     # MindNode = 1289197285;
-    Numbers = 409203825;
-    Pages = 409201541;
-    Patterns = 429449079;
+    # Numbers = 409203825;
+    # Pages = 409201541;
+    # Patterns = 429449079;
     # "Pixelmator Classic" = 407963104;
-    "Pixelmator Pro" = 1289583905;
-    "Save to Raindrop.io" = 1549370672;
-    Slack = 803453959;
+    # "Pixelmator Pro" = 1289583905;
+    # "Save to Raindrop.io" = 1549370672;
+    # Slack = 803453959;
     # SiteSucker = 442168834;
-    "Things 3" = 904280696;
+    # "Things 3" = 904280696;
     # TripMode = 1513400665;
     # Ulysses = 1225570693;
-    Vimari = 1480933944;
-    "WiFi Explorer" = 494803304;
-    Xcode = 497799835;
-    "Yubico Authenticator" = 1497506650;
+    # Vimari = 1480933944;
+    # "WiFi Explorer" = 494803304;
+    # Xcode = 497799835;
+    # "Yubico Authenticator" = 1497506650;
   };
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
-    "amethyst"
-    "arq"
-    "balenaetcher"
-    "camo-studio"
-    "cleanmymac"
-    "cloudflare-warp"
-    "etrecheckpro"
-    "discord"
     "firefox"
     "google-chrome"
     "google-drive"
     "gpg-suite"
     "hammerspoon"
     "keybase"
-    "nvidia-geforce-now"
-    # TODO: uncomment once version with Monterey support is available
-    # "obsbot-me-tool"
-    "obsbot-tinycam"
-    "obsidian"
-    "parallels"
-    "protonvpn"
-    "raindropio"
     "raycast"
-    "secretive"
-    "signal"
-    "skype"
-    "steam"
-    "superhuman"
-    "tor-browser"
-    "transmission"
-    "transmit"
-    "visual-studio-code"
     "vlc"
+    "yubico-yubikey-manager"
+    "yubico-yubikey-personalization-gui"
+
+    "adoptopenjdk11"
+    "brave-browser-beta"
+    "caffeine"
+    "docker"
+    "evernote"
+    "flycut"
+    # Fonts
+    "font-iosevka-nerd-font"
+    "font-iosevka"
+    "font-iosevka-aile"
+    "font-iosevka-curly-slab"
+    "font-juliamono"
+    "font-jetbrains-mono-nerd-font"
+    "font-jetbrains-mono"
+    "font-hack-nerd-font"
+
+    "fork"
+    "iterm2"
+    "jetbrains-toolbox"
+    "karabiner-elements"
+    # "kitty"
+    "slack"
+    "spotify"
+    "stats"
+    "telegram"
+    "virtualbox"
+    "virtualbox-extension-pack"
+    "whatsapp"
+    "zoom"
+    "miniconda"
     "yubico-yubikey-manager"
     "yubico-yubikey-personalization-gui"
   ];
@@ -122,7 +137,18 @@ in
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
-    "swift-format"
+   "swift-format"
     "swiftlint"
+    "coursier"
+    "go"
+    "luajit" # brew install --HEAD luajit
+    "neovim" # brew install --HEAD neovim
+    "ninja"
+    "node"
+    "postgres"
+    "sbt"
+    "skhd"
+    "yabai"
+    "coreutils"
   ];
 }

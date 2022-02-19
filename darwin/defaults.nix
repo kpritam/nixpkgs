@@ -6,12 +6,12 @@
     AppleMetricUnits = 1;
     AppleShowScrollBars = "Automatic";
     AppleTemperatureUnit = "Celsius";
-    InitialKeyRepeat = 15;
-    KeyRepeat = 2;
+    InitialKeyRepeat = 10;
+    KeyRepeat = 1;
     NSAutomaticCapitalizationEnabled = false;
     NSAutomaticDashSubstitutionEnabled = false;
     NSAutomaticPeriodSubstitutionEnabled = false;
-    _HIHideMenuBar = false;
+    _HIHideMenuBar = true;
   };
 
   # Firewall
@@ -27,7 +27,7 @@
     autohide = true;
     expose-group-by-app = false;
     mru-spaces = false;
-    tilesize = 128;
+    tilesize = 40;
     # Disable all hot corners
     wvous-bl-corner = 1;
     wvous-br-corner = 1;
