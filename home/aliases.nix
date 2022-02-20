@@ -22,7 +22,6 @@ in
   k = "kubectl";
   dc = "docker-compose";
   find = "fd";
-  mk = "minikube";
   du   = "ncdu --color dark -rr -x";
 
   v = "lvim";
