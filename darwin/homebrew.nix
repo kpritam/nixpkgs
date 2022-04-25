@@ -116,7 +116,7 @@ in
     "iterm2"
     "jetbrains-toolbox"
     "karabiner-elements"
-    # "kitty"
+    "kitty"
     "slack"
     "spotify"
     "stats"
@@ -128,6 +128,7 @@ in
     "miniconda"
     "yubico-yubikey-manager"
     "yubico-yubikey-personalization-gui"
+    "miro"
   ];
 
   # Configuration related to casks
@@ -156,5 +157,9 @@ in
     "k3d"
     "kubie"
     "kustomize"
+    "leapp"
+    "pinentry-mac"
+    "cockroachdb/tap/cockroach"
+    "ngrok"
   ];
 }

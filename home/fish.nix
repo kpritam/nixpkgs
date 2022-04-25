@@ -18,6 +18,10 @@ in
   # Fish functions ----------------------------------------------------------------------------- {{{
 
   programs.fish.functions = {
+    getsecret = ''
+      kubectl get secrets/$argv[1] "--template={{.data.$argv[2]}}" | base64 -d
+    '';
+
     # Toggles `$term_background` between "light" and "dark". Other Fish functions trigger when this
     # variable changes. We use a universal variable so that all instances of Fish have the same
     # value for the variable.
@@ -108,7 +112,7 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "decors";
           repo = "fish-colored-man";
-          rev = "c1e9db7765c932587b795d6c8965e9cff2fd849a";
+          rev = "latest";
           sha256 = "16ar220pz8lmv58c8fj81mi7slk0qb20dh5zdwcyyw12dgzahsvr";
         };
       }
@@ -117,7 +121,7 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "jethrokuan";
           repo = "z";
-          rev = "13a320bee8b815704772d94f5994745b11cd1e03";
+          rev = "latest";
           sha256 = "0z7l7fgd9khcq1fi9ymjjrxj58pw5xdzg8k6mxqmqw1345hkpr4f";
         };
       }
@@ -126,7 +130,7 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "edc";
           repo = "bass";
-          rev = "df4a1ebf8c0536e4bd7b7828a4c0dcb2b7b5d22b";
+          rev = "latest";
           sha256 = "1dgydrza6lvx3dl9spkla1g728x5rr76mqrwk2afrl732439y6jl";
         };
       }
@@ -136,7 +140,7 @@ in
         src = pkgs.fetchFromGitHub {
           owner = "oh-my-fish";
           repo = "plugin-foreign-env";
-          rev = "dddd9213272a0ab848d474d0cbde12ad034e65bc";
+          rev = "latest";
           sha256 = "00xqlyl3lffc5l0viin1nyp819wf81fncqyz87jx8ljjdhilmgbs";
         };
       }

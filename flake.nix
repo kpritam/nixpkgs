@@ -1,5 +1,5 @@
 {
-  description = "Pritam’s Nix system configs, and some other useful stuff.";
+  description = "Pritam Nix system configs, and some other useful stuff.";
 
   inputs = {
     # Package sets
@@ -192,13 +192,13 @@
         pritam-git = import ./home/git.nix;
         pritam-git-aliases = import ./home/git-aliases.nix;
         pritam-gh-aliases = import ./home/gh-aliases.nix;
-        pritam-kitty = import ./home/kitty.nix;
+        # pritam-kitty = import ./home/kitty.nix;
         pritam-packages = import ./home/packages.nix;
         pritam-starship = import ./home/starship.nix;
         pritam-starship-symbols = import ./home/starship-symbols.nix;
 
         # Modules I've created
-        programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
+        # programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         home-user-info = { lib, ... }: {
           options.home.user-info =
             (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
