@@ -51,6 +51,5 @@ in
   c = "code-insiders";
 
   localip = "ipconfig getifaddr en0";
-  ps = "${pkgs.procs}/bin/procs";
   tb = "toggle-background";
 }

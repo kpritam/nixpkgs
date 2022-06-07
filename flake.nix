@@ -3,20 +3,20 @@
 
   inputs = {
     # Package sets
-    nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-21.11-darwin;
-    nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
-    nixos-stable.url = github:NixOS/nixpkgs/nixos-21.11;
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixpkgs-22.05-darwin";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.05";
 
     # Environment/system management
-    darwin.url = github:LnL7/nix-darwin;
+    darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.url = github:nix-community/home-manager;
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
     # Other sources
-    flake-compat = { url = github:edolstra/flake-compat; flake = false; };
-    flake-utils.url = github:numtide/flake-utils;
+    flake-compat = { url = "github:edolstra/flake-compat"; flake = false; };
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
@@ -52,14 +52,15 @@
         # `home-manager` module
         home-manager.darwinModules.home-manager
         (
-          { config, lib, pkgs, ... }:
+          { config, ... }:
           let
             inherit (config.users) primaryUser;
           in
           {
             nixpkgs = nixpkgsConfig;
             # Hack to support legacy worklows that use `<nixpkgs>` etc.
-            nix.nixPath = { nixpkgs = "${primaryUser.nixConfigDirectory}/nixpkgs.nix"; };
+            # nix.nixPath = { nixpkgs = "${primaryUser.nixConfigDirectory}/nixpkgs.nix"; };
+            nix.nixPath = { nixpkgs = "${inputs.nixpkgs-unstable}"; };
             # `home-manager` config
             users.users.${primaryUser.username}.home = "/Users/${primaryUser.username}";
             home-manager.useGlobalPkgs = true;
@@ -139,19 +140,19 @@
 
       overlays = {
         # Overlays to add different versions `nixpkgs` into package set
-        pkgs-master = final: prev: {
+        pkgs-master = _: prev: {
           pkgs-master = import inputs.nixpkgs-master {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
           };
         };
-        pkgs-stable = final: prev: {
+        pkgs-stable = _: prev: {
           pkgs-stable = import inputs.nixpkgs-stable {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
           };
         };
-        pkgs-unstable = final: prev: {
+        pkgs-unstable = _: prev: {
           pkgs-unstable = import inputs.nixpkgs-unstable {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
@@ -159,7 +160,7 @@
         };
 
         # Overlay useful on Macs with Apple Silicon
-        apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+        apple-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
           # Add access to x86 packages system is running Apple Silicon
           pkgs-x86 = import inputs.nixpkgs-unstable {
             system = "x86_64-darwin";
