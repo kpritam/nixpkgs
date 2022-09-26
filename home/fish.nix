@@ -107,43 +107,6 @@ in
   programs.fish = {
     inherit shellAliases;
     plugins = [
-      {
-        name = "colored-man";
-        src = pkgs.fetchFromGitHub {
-          owner = "decors";
-          repo = "fish-colored-man";
-          rev = "latest";
-          sha256 = "16ar220pz8lmv58c8fj81mi7slk0qb20dh5zdwcyyw12dgzahsvr";
-        };
-      }
-      {
-        name = "z";
-        src = pkgs.fetchFromGitHub {
-          owner = "jethrokuan";
-          repo = "z";
-          rev = "latest";
-          sha256 = "0z7l7fgd9khcq1fi9ymjjrxj58pw5xdzg8k6mxqmqw1345hkpr4f";
-        };
-      }
-      {
-        name = "bass";
-        src = pkgs.fetchFromGitHub {
-          owner = "edc";
-          repo = "bass";
-          rev = "latest";
-          sha256 = "1dgydrza6lvx3dl9spkla1g728x5rr76mqrwk2afrl732439y6jl";
-        };
-      }
-
-      {
-        name = "foreign-env";
-        src = pkgs.fetchFromGitHub {
-          owner = "oh-my-fish";
-          repo = "plugin-foreign-env";
-          rev = "latest";
-          sha256 = "00xqlyl3lffc5l0viin1nyp819wf81fncqyz87jx8ljjdhilmgbs";
-        };
-      }
     ];
   };
 

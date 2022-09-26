@@ -25,10 +25,11 @@ in
   '';
 
   homebrew.enable = true;
-  homebrew.autoUpdate = true;
-  homebrew.cleanup = "zap";
+  homebrew.onActivation.upgrade = true;
+  homebrew.onActivation.autoUpdate = true;
+  homebrew.onActivation.cleanup = "zap";
   homebrew.global.brewfile = true;
-  homebrew.global.noLock = true;
+  homebrew.global.lockfiles = true;
 
   homebrew.taps = [
     "homebrew/cask"
@@ -44,7 +45,7 @@ in
   ];
   
   homebrew.extraConfig = ''
-    brew "emacs-plus@28", args:["with-xwidgets", "with-native-compe", "with-modern-purple-flat-icon", "with-no-titlebar"]
+    brew "emacs-plus@29", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "--with-imagemagick"]
   '';
 
   # Prefer installing application from the Mac App Store
@@ -85,6 +86,7 @@ in
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
+    "1password"
     "firefox"
     "google-chrome"
     "google-drive"
@@ -139,14 +141,13 @@ in
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
     "swift-format"
-    "swiftlint"
     "coursier"
     "go"
+    "gh"
     "luajit" # brew install --HEAD luajit
     "neovim" # brew install --HEAD neovim
     "ninja"
     "node"
-    "postgres"
     "sbt"
     "skhd"
     "yabai"
@@ -157,9 +158,6 @@ in
     "k3d"
     "kubie"
     "kustomize"
-    "leapp"
     "pinentry-mac"
-    "cockroachdb/tap/cockroach"
-    "ngrok"
   ];
 }
