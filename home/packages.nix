@@ -23,7 +23,11 @@
   # Zoxide, a faster way to navigate the filesystem
   # https://github.com/ajeetdsouza/zoxide
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.zoxide.enable
-  programs.zoxide.enable = true;
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = true;
+  };
 
   home.packages = with pkgs; [
     bandwhich # display current network utilization by process
@@ -31,6 +35,7 @@
     curl
     exa # fancy version of `ls`
     fd # fancy version of `find`
+    fzf
     htop # fancy version of `top`
     ripgrep # better version of `grep`
     tealdeer # rust implementation of `tldr`

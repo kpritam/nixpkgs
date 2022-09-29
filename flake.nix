@@ -21,7 +21,7 @@
 
   outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
     let
-      # Some building blocks ------------------------------------------------------------------- {{{
+      # Some building blocks
 
       inherit (darwin.lib) darwinSystem;
       inherit (inputs.nixpkgs-unstable.lib) attrValues makeOverridable optionalAttrs singleton;
@@ -29,16 +29,9 @@
       # Configuration for `nixpkgs`
       nixpkgsConfig = {
         config = { allowUnfree = true; };
-        overlays = attrValues self.overlays ++ singleton (
-          # Sub in x86 version of packages that don't build on Apple Silicon yet
-          final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            inherit (final.pkgs-x86)
-              idris2;
-          })
-        );
       };
 
-      homeManagerStateVersion = "22.05";
+      homeManagerStateVersion = "22.11";
 
       primaryUserInfo = {
         username = "pritamkadam";
@@ -74,11 +67,10 @@
           }
         )
       ];
-      # }}}
     in
     {
 
-      # System outputs ------------------------------------------------------------------------- {{{
+      # System outputs
 
       # My `nix-darwin` configs
       darwinConfigurations = rec {
@@ -87,9 +79,7 @@
           system = "x86_64-darwin";
           modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
         };
-        bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
-        # My Apple Silicon macOS laptop config
         MacBookPro = darwinSystem {
           system = "x86_64-darwin";
           modules = nixDarwinCommonModules ++ [
@@ -104,81 +94,14 @@
             }
           ];
         };
-
-        # Config with small modifications needed/desired for CI with GitHub workflow
-        githubCI = darwinSystem {
-          system = "x86_64-darwin";
-          modules = nixDarwinCommonModules ++ [
-            ({ lib, ... }: {
-              users.primaryUser = primaryUserInfo // {
-                username = "runner";
-                nixConfigDirectory = "/Users/runner/work/nixpkgs/nixpkgs";
-              };
-              homebrew.enable = lib.mkForce false;
-            })
-          ];
-        };
-      };
-
-      # Config I use with Linux cloud VMs
-      # Build and activate with `nix build .#cloudVM.activationPackage; ./result/activate`
-      cloudVM = home-manager.lib.homeManagerConfiguration {
-        system = "x86_64-linux";
-        stateVersion = homeManagerStateVersion;
-        homeDirectory = "/home/pritamkadam";
-        username = "pritamkadam";
-        configuration = {
-          imports = attrValues self.homeManagerModules ++ singleton {
-            home.user-info = primaryUserInfo;
-          };
-          nixpkgs = nixpkgsConfig;
-        };
-      };
-      # }}}
-
-      # Non-system outputs --------------------------------------------------------------------- {{{
-
-      overlays = {
-        # Overlays to add different versions `nixpkgs` into package set
-        pkgs-master = _: prev: {
-          pkgs-master = import inputs.nixpkgs-master {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
-        pkgs-stable = _: prev: {
-          pkgs-stable = import inputs.nixpkgs-stable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
-        pkgs-unstable = _: prev: {
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsConfig) config;
-          };
-        };
-
-        # Overlay useful on Macs with Apple Silicon
-        apple-silicon = _: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-          # Add access to x86 packages system is running Apple Silicon
-          pkgs-x86 = import inputs.nixpkgs-unstable {
-            system = "x86_64-darwin";
-            inherit (nixpkgsConfig) config;
-          };
-        };
-
-
-        # Overlay that adds `lib.colors` to reference colors elsewhere in system configs
-        colors = import ./overlays/colors.nix;
       };
 
       darwinModules = {
         # My configurations
-        pritam-bootstrap = import ./darwin/bootstrap.nix;
-        pritam-defaults = import ./darwin/defaults.nix;
-        pritam-general = import ./darwin/general.nix;
-        pritam-homebrew = import ./darwin/homebrew.nix;
+        pritamkadam-bootstrap = import ./darwin/bootstrap.nix;
+        pritamkadam-defaults = import ./darwin/defaults.nix;
+        pritamkadam-general = import ./darwin/general.nix;
+        pritamkadam-homebrew = import ./darwin/homebrew.nix;
 
         # Modules I've created
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
@@ -187,36 +110,20 @@
 
       homeManagerModules = {
         # My configurations
-        pritam-config-files = import ./home/config-files.nix;
-        pritam-fish = import ./home/fish.nix;
-        pritam-git = import ./home/git.nix;
-        pritam-git-aliases = import ./home/git-aliases.nix;
-        pritam-gh-aliases = import ./home/gh-aliases.nix;
+        pritamkadam-config-files = import ./home/config-files.nix;
+        pritamkadam-fish = import ./home/fish.nix;
+        pritamkadam-git = import ./home/git.nix;
+        pritamkadam-git-aliases = import ./home/git-aliases.nix;
+        pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
         # pritam-kitty = import ./home/kitty.nix;
-        pritam-packages = import ./home/packages.nix;
-        pritam-starship = import ./home/starship.nix;
-        pritam-starship-symbols = import ./home/starship-symbols.nix;
+        pritamkadam-packages = import ./home/packages.nix;
+        pritamkadam-starship = import ./home/starship.nix;
+        pritamkadam-starship-symbols = import ./home/starship-symbols.nix;
 
-        # Modules I've created
-        # programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
         home-user-info = { lib, ... }: {
           options.home.user-info =
             (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
         };
       };
-      # }}}
-
-      # Add re-export `nixpkgs` packages with overlays.
-      # This is handy in combination with `nix registry add my /Users/pritam/.config/nixpkgs`
-    } // flake-utils.lib.eachDefaultSystem (system: {
-      legacyPackages = import inputs.nixpkgs-unstable {
-        inherit system;
-        inherit (nixpkgsConfig) config;
-        overlays = with self.overlays; [
-          pkgs-master
-          pkgs-stable
-        ];
-      };
-    });
+    };
 }
-# vim: foldmethod=marker

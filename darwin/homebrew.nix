@@ -43,7 +43,7 @@ in
     "coursier/formulas"
     "d12frosted/emacs-plus"
   ];
-  
+
   homebrew.extraConfig = ''
     brew "emacs-plus@29", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "--with-imagemagick"]
   '';
@@ -140,17 +140,19 @@ in
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
+    "aspell"
     "swift-format"
     "coursier"
     "go"
-    "gh"
     "luajit" # brew install --HEAD luajit
     "neovim" # brew install --HEAD neovim
     "ninja"
     "node"
+    "rg"
     "sbt"
     "skhd"
     "yabai"
+    "tmux"
     "coreutils"
     # k8s
     "kubernetes-cli"
