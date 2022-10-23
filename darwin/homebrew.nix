@@ -48,41 +48,6 @@ in
     brew "emacs-plus@29", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "--with-imagemagick"]
   '';
 
-  # Prefer installing application from the Mac App Store
-  #
-  # Commented apps suffer continual update issue:
-  # https://github.com/malob/nixpkgs/issues/9
-  homebrew.masApps = {
-    # "1Blocker" = 1365531024;
-    # "1Password" = 1333542190;
-    # "Accelerate for Safari" = 1459809092;
-    # "Apple Configurator 2" = 1037126344;
-    # DaisyDisk = 411643860;
-    # "Dark Mode for Safari" = 1397180934;
-    # Deliveries = 290986013;
-    # Fantastical = 975937182;
-    # "Gemini 2" = 1090488118;
-    # "iMazing Profile Editor" = 1487860882;
-    # Keynote = 409183694;
-    # "LG Screen Manager" = 1142051783;
-    # MindNode = 1289197285;
-    # Numbers = 409203825;
-    # Pages = 409201541;
-    # Patterns = 429449079;
-    # "Pixelmator Classic" = 407963104;
-    # "Pixelmator Pro" = 1289583905;
-    # "Save to Raindrop.io" = 1549370672;
-    # Slack = 803453959;
-    # SiteSucker = 442168834;
-    # "Things 3" = 904280696;
-    # TripMode = 1513400665;
-    # Ulysses = 1225570693;
-    # Vimari = 1480933944;
-    # "WiFi Explorer" = 494803304;
-    # Xcode = 497799835;
-    # "Yubico Authenticator" = 1497506650;
-  };
-
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
@@ -95,14 +60,9 @@ in
     "keybase"
     "raycast"
     "vlc"
-    "yubico-yubikey-manager"
-    "yubico-yubikey-personalization-gui"
-
-    "adoptopenjdk11"
     "brave-browser-beta"
     "caffeine"
     "docker"
-    "evernote"
     "flycut"
     # Fonts
     "font-iosevka-nerd-font"
@@ -128,9 +88,8 @@ in
     "whatsapp"
     "zoom"
     "miniconda"
-    "yubico-yubikey-manager"
-    "yubico-yubikey-personalization-gui"
     "miro"
+    "dbeaver-community"
   ];
 
   # Configuration related to casks
@@ -140,8 +99,10 @@ in
   # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
+    "angular-cli"
     "aspell"
     "swift-format"
+    "colima"
     "coursier"
     "go"
     "luajit" # brew install --HEAD luajit
@@ -149,7 +110,6 @@ in
     "ninja"
     "node"
     "rg"
-    "sbt"
     "skhd"
     "yabai"
     "tmux"

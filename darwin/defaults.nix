@@ -1,4 +1,6 @@
 {
+  documentation.enable = false;
+  documentation.doc.enable = false;
   system.defaults.NSGlobalDomain = {
     "com.apple.trackpad.scaling" = 3.0;
     AppleInterfaceStyleSwitchesAutomatically = true;
