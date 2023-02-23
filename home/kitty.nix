@@ -57,13 +57,13 @@ in
   # }}}
 
   # Colors config ------------------------------------------------------------------------------ {{{
-  programs.fish.functions.set-term-colors = {
-    body = "term-background $term_background";
-    onVariable = "term_background";
-  };
+  # programs.fish.functions.set-term-colors = {
+  #   body = "term-background $term_background";
+  #   onVariable = "term_background";
+  # };
   programs.fish.interactiveShellInit = ''
     # Set term colors based on value of `$term_backdround` when shell starts up.
-    set-term-colors
+    # set-term-colors
   '';
   programs.kitty.keybindings = {
     "kitty_mod+t" = "new_tab_with_cwd";

@@ -40,6 +40,7 @@ in
     "koekeishiya/formulae"
     "coursier/formulas"
     "d12frosted/emacs-plus"
+    "FelixKratz/formulae"
   ];
 
   homebrew.extraConfig = ''
@@ -55,7 +56,6 @@ in
     "google-drive"
     "gpg-suite"
     "hammerspoon"
-    "keybase"
     "raycast"
     "vlc"
     "brave-browser-beta"
@@ -88,6 +88,10 @@ in
     "miniconda"
     "miro"
     "dbeaver-community"
+    "sf-symbols"
+    "microsoft-teams"
+    "discord"
+    "visual-studio-code-insiders"
   ];
 
   # Configuration related to casks
@@ -99,6 +103,7 @@ in
   homebrew.brews = [
     "angular-cli"
     "aspell"
+    "awscli"
     "swift-format"
     "colima"
     "coursier"
@@ -114,10 +119,14 @@ in
     "coreutils"
     # k8s
     "kubernetes-cli"
+    "derailed/k9s/k9s"
     "istioctl"
     "k3d"
     "kubie"
     "kustomize"
     "pinentry-mac"
+    "sketchybar"
+    "nvm"
+    "yarn"
   ];
 }

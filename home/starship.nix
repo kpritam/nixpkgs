@@ -14,7 +14,7 @@
     memory_usage.disabled = true; # because it includes cached memory it's reported as full a lot
     username.style_user = "bold blue"; # don't like the default
     # line_break.disabled = true;
-    kubernetes.disabled = false;
-    kubernetes.format = "\[[☸](bold blue) [$context](bold yellow)|[$namespace](bold green)\] ";
+    kubernetes.disabled = true;
+    kubernetes.format = "on [☸ $context \($namespace\)](dimmed yellow) ";
   };
 }
