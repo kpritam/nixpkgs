@@ -31,7 +31,6 @@ in
 
   homebrew.taps = [
     "homebrew/cask"
-    "homebrew/cask-drivers"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/core"
@@ -41,49 +40,42 @@ in
     "coursier/formulas"
     "d12frosted/emacs-plus"
     "FelixKratz/formulae"
+    "r-lib/rig"
+    "FelixKratz/formulae"
   ];
 
   homebrew.extraConfig = ''
-    brew "emacs-plus@29", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "--with-imagemagick"]
+    brew "emacs-plus@30", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "with-imagemagick"]
   '';
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
     "1password"
-    "firefox"
-    "google-chrome"
-    "google-drive"
     "gpg-suite"
     "hammerspoon"
     "raycast"
     "vlc"
-    "brave-browser-beta"
     "caffeine"
     "docker"
     "flycut"
-    # Fonts
-    "font-iosevka-nerd-font"
-    "font-iosevka"
-    "font-iosevka-aile"
-    "font-iosevka-curly-slab"
-    "font-juliamono"
     "font-jetbrains-mono-nerd-font"
     "font-jetbrains-mono"
     "font-hack-nerd-font"
+    "font-iosevka-curly-slab"
+    "font-iosevka-aile"
+    "font-fira-code"
+    "font-hasklug-nerd-font"
 
     "fork"
-    "iterm2"
+    "insomnia"
     "jetbrains-toolbox"
     "karabiner-elements"
     "kitty"
+    "orbstack"
     "slack"
     "spotify"
     "stats"
-    "telegram"
-    "virtualbox"
-    "virtualbox-extension-pack"
-    "whatsapp"
     "zoom"
     "miniconda"
     "miro"
@@ -92,6 +84,10 @@ in
     "microsoft-teams"
     "discord"
     "visual-studio-code-insiders"
+    # R Deps
+    "rig"
+    "xquartz"
+    "rstudio"
   ];
 
   # Configuration related to casks
@@ -104,29 +100,26 @@ in
     "angular-cli"
     "aspell"
     "awscli"
-    "swift-format"
-    "colima"
     "coursier"
     "go"
-    "luajit" # brew install --HEAD luajit
-    "neovim" # brew install --HEAD neovim
-    "ninja"
+    "neovim"
     "node"
     "rg"
     "skhd"
     "yabai"
     "tmux"
-    "coreutils"
     # k8s
     "kubernetes-cli"
-    "derailed/k9s/k9s"
-    "istioctl"
-    "k3d"
     "kubie"
-    "kustomize"
     "pinentry-mac"
     "sketchybar"
     "nvm"
     "yarn"
+    "unixodbc"
+    "shfmt"
+    "shellcheck"
+    "editorconfig"
+    "cmake"
+    "borders"
   ];
 }

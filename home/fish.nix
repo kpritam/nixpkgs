@@ -130,10 +130,11 @@ in
 
 
     ".." = "cd ..";
-    l = "${pkgs.exa}/bin/exa -lahG";
-    ls = "${pkgs.colorls}/bin/colorls";
-    lst = "${pkgs.colorls}/bin/colorls --tree";
-    la = "${pkgs.colorls}/bin/colorls -lah";
+    l = "${pkgs.eza}/bin/eza -lahG";
+    ls = "${pkgs.eza}/bin/eza";
+    lst = "${pkgs.eza}/bin/eza -T";
+    la = "${pkgs.eza}/bin/eza -lah";
+    ll = "${pkgs.eza}/bin/eza -l -g --icons";
     md = "mkdir -p";
     cx = "chmod +x";
     cat = "${pkgs.bat}/bin/bat";
@@ -150,6 +151,7 @@ in
 
     c = "code-insiders";
 
+    R = "radian";
     localip = "ipconfig getifaddr en0";
     tb = "toggle-background";
   };

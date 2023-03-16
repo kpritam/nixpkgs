@@ -33,7 +33,7 @@
     bandwhich # display current network utilization by process
     coreutils
     curl
-    exa # fancy version of `ls`
+    eza # fancy version of `ls`
     fd # fancy version of `find`
     fzf
     htop # fancy version of `top`
