@@ -110,8 +110,6 @@
         pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
         pritamkadam-kitty = import ./home/kitty.nix;
         pritamkadam-packages = import ./home/packages.nix;
-        pritamkadam-starship = import ./home/starship.nix;
-        pritamkadam-starship-symbols = import ./home/starship-symbols.nix;
 
         # Modules I've created
         programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;

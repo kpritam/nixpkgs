@@ -37,11 +37,9 @@ in
     "homebrew/services"
     "AdoptOpenJDK/openjdk"
     "koekeishiya/formulae"
-    "coursier/formulas"
     "d12frosted/emacs-plus"
     "FelixKratz/formulae"
     "r-lib/rig"
-    "FelixKratz/formulae"
   ];
 
   homebrew.extraConfig = ''
@@ -73,15 +71,11 @@ in
     "karabiner-elements"
     "kitty"
     "orbstack"
-    "slack"
     "spotify"
     "stats"
     "zoom"
-    "miniconda"
-    "miro"
     "dbeaver-community"
     "sf-symbols"
-    "microsoft-teams"
     "discord"
     "visual-studio-code-insiders"
     # R Deps
@@ -100,7 +94,6 @@ in
     "angular-cli"
     "aspell"
     "awscli"
-    "coursier"
     "go"
     "neovim"
     "node"
