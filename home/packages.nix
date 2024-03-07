@@ -39,6 +39,7 @@
     tealdeer # rust implementation of `tldr`
     wget
     jq
+    nixpkgs-fmt
 
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods

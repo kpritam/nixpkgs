@@ -19,8 +19,19 @@
   # Fonts
   fonts.fontDir.enable = true;
   fonts.fonts = with pkgs; [
-     recursive
-     (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    recursive
+    (nerdfonts.override { 
+      fonts = [ 
+        "JetBrainsMono"
+        "Hack"
+        "Iosevka"
+        "FiraCode"
+        "FiraMono"
+        "Inconsolata"
+        "SourceCodePro"
+        "UbuntuMono"
+      ]; 
+    })
    ];
 
   # Keyboard

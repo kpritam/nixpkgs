@@ -39,7 +39,6 @@ in
     "koekeishiya/formulae"
     "d12frosted/emacs-plus"
     "FelixKratz/formulae"
-    "r-lib/rig"
   ];
 
   homebrew.extraConfig = ''
@@ -57,13 +56,8 @@ in
     "caffeine"
     "docker"
     "flycut"
-    "font-jetbrains-mono-nerd-font"
-    "font-jetbrains-mono"
-    "font-hack-nerd-font"
-    "font-iosevka-curly-slab"
-    "font-iosevka-aile"
-    "font-fira-code"
-    "font-hasklug-nerd-font"
+    "google-chrome"
+    "arc"
 
     "fork"
     "insomnia"
@@ -78,10 +72,6 @@ in
     "sf-symbols"
     "discord"
     "visual-studio-code-insiders"
-    # R Deps
-    "rig"
-    "xquartz"
-    "rstudio"
   ];
 
   # Configuration related to casks
@@ -97,7 +87,6 @@ in
     "go"
     "neovim"
     "node"
-    "rg"
     "skhd"
     "yabai"
     "tmux"
