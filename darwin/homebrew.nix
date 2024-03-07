@@ -41,10 +41,6 @@ in
     "FelixKratz/formulae"
   ];
 
-  homebrew.extraConfig = ''
-    brew "emacs-plus@30", args:["with-xwidgets", "with-native-comp", "with-modern-purple-flat-icon", "with-imagemagick"]
-  '';
-
   # If an app isn't available in the Mac App Store, or the version in the App Store has
   # limitiations, e.g., Transmit, install the Homebrew Cask.
   homebrew.casks = [
@@ -58,7 +54,7 @@ in
     "flycut"
     "google-chrome"
     "arc"
-
+    "tuple"
     "fork"
     "insomnia"
     "jetbrains-toolbox"
@@ -87,8 +83,14 @@ in
     "go"
     "neovim"
     "node"
-    "skhd"
-    "yabai"
+    {
+      name = "skhd";
+      restart_service = "changed";
+    }
+    {
+      name = "yabai";
+      restart_service = "changed";
+    }
     "tmux"
     # k8s
     "kubernetes-cli"
@@ -103,5 +105,9 @@ in
     "editorconfig"
     "cmake"
     "borders"
+    {
+      name = "emacs-plus@30";
+      args = ["with-xwidgets" "with-native-comp" "with-modern-purple-flat-icon" "with-imagemagick"];
+    }
   ];
 }

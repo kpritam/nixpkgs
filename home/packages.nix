@@ -40,7 +40,6 @@
     wget
     jq
     nixpkgs-fmt
-
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
   ];

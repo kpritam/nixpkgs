@@ -51,6 +51,15 @@
       end
     end
   '';
+
+
+  programs.tmux = {
+    enable = true;
+    enableFzf = true;
+    enableMouse = true;
+    enableVim = true;
+  };
+
   environment.variables.SHELL = "${pkgs.fish}/bin/fish";
 
   # Install and setup ZSH to work with nix(-darwin) as well
