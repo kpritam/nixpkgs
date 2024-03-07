@@ -1,4 +1,4 @@
-p#!/usr/bin/env sh
+#!/usr/bin/env sh
 
 # the scripting-addition must be loaded manually if
 # you are running yabai on macOS Big Sur. Uncomment
@@ -11,89 +11,132 @@ p#!/usr/bin/env sh
 # see this wiki page for information:
 #  - https://github.com/koekeishiya/yabai/wiki/Installing-yabai-(latest-release)
 #
-sudo yabai --load-sa
+# for this to work you must configure sudo such that
+# it will be able to run the command without password
+
 yabai -m signal --add event=dock_did_restart action="sudo yabai --load-sa"
+sudo yabai --load-sa
+
+# global settings
+yabai -m config                              \
+    external_bar                all:45:0     \
+    mouse_follows_focus         on           \
+    focus_follows_mouse         autoraise    \
+    window_placement            second_child \
+    window_topmost              off          \
+    window_shadow               off          \
+    window_animation_duration   0.25         \
+    window_opacity_duration     0.25         \
+    active_window_opacity       0.90         \
+    normal_window_opacity       0.50         \
+    window_opacity              on           \
+    insert_feedback_color       0xaad75f5f   \
+    active_window_border_color  0xBF775759   \
+    normal_window_border_color  0x7f353535   \
+    window_border_width         4            \
+    window_border_radius        12           \
+    window_border_blur          on           \
+    window_border_hidpi         on           \
+    window_border               on           \
+    split_ratio                 0.50         \
+    split_type                  auto         \
+    auto_balance                off          \
+    top_padding                 10           \
+    left_padding                10           \
+    right_padding               10           \
+    bottom_padding              10           \
+    window_gap                  10           \
+    layout                      bsp          \
+    mouse_modifier              fn           \
+    mouse_action1               move         \
+    mouse_action2               resize       \
+    mouse_drop_action           swap
 
 # let simple-bar handle bar
-yabai -m config external_bar all:32:0
-yabai -m config focus_follows_mouse off
-yabai -m config window_placement second_child
-yabai -m config window_topmost on
-yabai -m config window_shadow float
-yabai -m config window_opacity off
-yabai -m config window_opacity_duration 0.0
-yabai -m config active_window_opacity 1.0
-yabai -m config normal_window_opacity 0.90
-
-yabai -m config window_border on
-yabai -m config window_border_width 3
-yabai -m config active_window_border_color 0xFF66868b
-yabai -m config normal_window_border_color 0xFF445d61
-yabai -m config insert_feedback_color 0xFF445d61
-yabai -m config split_ratio 0.50
-yabai -m config auto_balance on
-yabai -m config mouse_modifier fn
-yabai -m config mouse_action1 move
-yabai -m config mouse_action2 resize
-yabai -m config mouse_drop_action stack
-
-# general space settings
-yabai -m config layout bsp
-yabai -m config top_padding 20
-yabai -m config bottom_padding 20
-yabai -m config left_padding 20
-yabai -m config right_padding 20
-yabai -m config window_gap 20
-# yabai -m signal --add event=window_created action="~/.config/yabai/refresh.sh"
+# yabai -m config external_bar all:38:0
+# yabai -m config focus_follows_mouse off
+# yabai -m config window_placement second_child
+# yabai -m config window_topmost on
+# yabai -m config window_shadow float
+# 
+# yabai -m config window_animation_duration   0.25
+# yabai -m config window_opacity_duration     0.25
+# yabai -m config active_window_opacity       0.90
+# yabai -m config normal_window_opacity       0.50
+# yabai -m config window_opacity              on
+# 
+# yabai -m config window_border on
+# yabai -m config window_border_width 2
+# yabai -m config window_border_radius 11
+# yabai -m config active_window_border_color  0xffe1e3e4
+# yabai -m config insert_feedback_color       0xff9dd274
+# yabai -m config normal_window_border_color  0xff2a2f38
+# yabai -m config active_window_opacity       1.0
+# yabai -m config normal_window_opacity       0.30
+# yabai -m config split_ratio                 0.50
+# yabai -m config auto_balance off
+# yabai -m config mouse_modifier fn
+# yabai -m config mouse_action1 move
+# yabai -m config mouse_action2 resize
+# yabai -m config mouse_drop_action stack
+# 
+# # general space settings
+# yabai -m config layout bsp
+# yabai -m config top_padding 20
+# yabai -m config bottom_padding 10
+# yabai -m config left_padding 10
+# yabai -m config right_padding 10
+# yabai -m config window_gap 8
+# # yabai -m signal --add event=window_created action="~/.config/yabai/refresh.sh"
 # yabai -m signal --add event=window_destroyed action="~/.config/yabai/refresh.sh"
 
 # Space labels
-yabai -m space 1 --label 1
-yabai -m space 2 --label 2
-yabai -m space 3 --label 3
-yabai -m space 4 --label 4
-yabai -m space 5 --label 5
-yabai -m space 6 --label 6
-yabai -m space 7 --label 7
-yabai -m space 8 --label 8
-yabai -m space 9 --label 9
+yabai -m space 1 --label "1"
+yabai -m space 2 --label "2"
+yabai -m space 3 --label "3"
+yabai -m space 4 --label "4"
+yabai -m space 5 --label "5"
+yabai -m space 6 --label "6"
+yabai -m space 7 --label "7"
+yabai -m space 8 --label "8"
+yabai -m space 9 --label "9"
 
 # Space config
 yabai -m config --space 9 layout float
 
 # Unmanaged
-
+yabai -m rule --add label="Brave Browser Beta" app="^Brave Browser Beta$"
+yabai -m rule --add label="Code - Insiders" app="^Code - Insiders$"
+yabai -m rule --add label="kitty" app="^kitty$"
 yabai -m rule --add label="1Password 7" app="^1Password 7$" manage=off
-yabai -m rule --add label="VLC" app="^VLC$" manage=off border=off
+yabai -m rule --add label="VLC" app="^VLC$" manage=off
 yabai -m rule --add app="^Docker Desktop$" manage=off
 yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
 yabai -m rule --add label="Alfred Preferences" app="^Alfred Preferences$" manage=off
 yabai -m rule --add label="Calculator" app="^Calculator$" manage=off
 yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info|Pref)" manage=off
 yabai -m rule --add label="Preview" app="Preview" manage=off
-yabai -m rule --add label="Stickies" app="Stickies" manage=off border=off
-yabai -m rule --add label="System Preferences" app="^System Preferences$" manage=off
+yabai -m rule --add label="Stickies" app="Stickies" manage=off
+yabai -m rule --add app="^System Settings$" manage=off
 yabai -m rule --add label="VirtualBox" app="^VirtualBox$" manage=off
-yabai -m rule --add app="^JetBrains Toolbox$" sticky=on layer=above manage=off border=off
-yabai -m rule --add app="^IntelliJ IDEA-EAP$" title="Preferences" sticky=on layer=above manage=off border=off
-yabai -m rule --add app="^IntelliJ IDEA$" title="Preferences" sticky=on layer=above manage=off border=off
-yabai -m rule --add app="^GoLand$" title="Preferences" sticky=on layer=above manage=off border=off
-yabai -m rule --add app="^GoLand-EAP$" title="Preferences" sticky=on layer=above manage=off border=off
-yabai -m rule --add app="Parallels Desktop" title="^(Control Center|Parallels Desktop Preferences)$" manage=off sticky=on layer=above
-yabai -m rule --add app="Stats" sticky=on layer=above manage=off border=off
+yabai -m rule --add app="^JetBrains Toolbox$" sticky=on layer=above manage=off
+yabai -m rule --add app="^IntelliJ IDEA-EAP$" title="Preferences" sticky=on layer=above manage=off
+yabai -m rule --add app="^IntelliJ IDEA$" title="Preferences" sticky=on layer=above manage=off
+yabai -m rule --add app="^IntelliJ IDEA$" title="Settings" sticky=on layer=above manage=off
+yabai -m rule --add app="Stats" sticky=on layer=above manage=off
 
 # Browser
 yabai -m rule --add app="^Brave Browser Beta$" space=^1
 
 # Dev
-yabai -m rule --add app="^iTerm2$" space=^2 opacity=0.95
-yabai -m rule --add app="^kitty$" space=^2 opacity=0.95
-yabai -m rule --add app="^IntelliJ IDEA-EAP$" space=^3 opacity=0.95
-yabai -m rule --add app="^IntelliJ IDEA$" space=^3 opacity=0.95
-yabai -m rule --add app="^GoLand$" space=^3 opacity=0.95
-yabai -m rule --add app="^GoLand-EAP$" space=^3 opacity=0.95
-yabai -m rule --add app="^Code - Insiders$" space=^3 opacity=0.95
-yabai -m rule --add app="^Emacs$" space=^4 opacity=0.95 manage=off
+yabai -m rule --add app="^iTerm2$" space=^2
+yabai -m rule --add app="^kitty$" space=^2
+yabai -m rule --add app="^IntelliJ IDEA-EAP$" space=^3
+yabai -m rule --add app="^IntelliJ IDEA$" space=^3
+yabai -m rule --add app="^GoLand$" space=^3
+yabai -m rule --add app="^GoLand-EAP$" space=^3
+yabai -m rule --add app="^Code - Insiders$" space=^3
+yabai -m rule --add app="^Emacs$" space=^4
 
 yabai -m rule --add app="^Fork$" space=^5
 
@@ -111,15 +154,20 @@ yabai -m rule --add app="^QuickTime Player$" space=^8
 yabai -m rule --add app="^VLC$" space=^8
 yabai -m rule --add app="^Spotify$" space=^8
 yabai -m rule --add app="^Firefox$" space=^8
-yabai -m rule --add app="^zoom.us$" space=^8
 
 # Misc
 yabai -m rule --add app="^Finder$" space=^9
 yabai -m rule --add app="^Microsoft Word$" space=^9
+yabai -m rule --add app="^Microsoft Outlook$" space=^9
 
 # signals
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+
+# Sketchybar
+yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"
+yabai -m signal --add event=window_created action="sketchybar --trigger windows_on_spaces"
+yabai -m signal --add event=window_destroyed action="sketchybar --trigger windows_on_spaces"
 
 # add the following to the end of your yabairc to have it launch automatically when yabai starts.
 # make sure the limelight binary is added somewhere in your $PATH
@@ -134,5 +182,6 @@ yabai -m signal --add event=application_terminated action="yabai -m query --wind
 # when the config is executed during startup.
 #
 # for this to work you must configure sudo such that
-# it will be able to run the command without password
+# it will be able to run the command without Password
 echo "yabai configuration loaded.."
+# borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0 &

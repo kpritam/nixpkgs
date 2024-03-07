@@ -1,4 +1,4 @@
-source ~/.config/nvim/init.lua
+source ~/.config/lvim/config.lua
 
 set which-key
 let g:WhichKey_FontFamily="Fantasque Sans Mono"

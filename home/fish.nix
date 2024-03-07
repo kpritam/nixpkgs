@@ -16,10 +16,6 @@ in
   # Fish functions ----------------------------------------------------------------------------- {{{
 
   programs.fish.functions = {
-    getsecret = ''
-      kubectl get secrets/$argv[1] "--template={{.data.$argv[2]}}" | base64 -d
-    '';
-
     # Toggles `$term_background` between "light" and "dark". Other Fish functions trigger when this
     # variable changes. We use a universal variable so that all instances of Fish have the same
     # value for the variable.

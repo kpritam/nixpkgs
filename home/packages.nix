@@ -30,20 +30,15 @@
   };
 
   home.packages = with pkgs; [
-    bandwhich # display current network utilization by process
     coreutils
     curl
     eza # fancy version of `ls`
     fd # fancy version of `find`
     fzf
-    htop # fancy version of `top`
     ripgrep # better version of `grep`
     tealdeer # rust implementation of `tldr`
-    unrar # extract RAR archives
     wget
-    xz # extract XZ archives
     jq
-    comma # run software from without installing it
 
   ] ++ lib.optionals stdenv.isDarwin [
     cocoapods
