@@ -52,7 +52,6 @@
     end
   '';
 
-
   programs.tmux = {
     enable = true;
     enableFzf = true;

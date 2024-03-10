@@ -53,8 +53,8 @@ in
     "docker"
     "flycut"
     "google-chrome"
-    "arc"
-    "tuple"
+    # "arc"
+    # "tuple"
     "fork"
     "insomnia"
     "jetbrains-toolbox"
@@ -83,14 +83,8 @@ in
     "go"
     "neovim"
     "node"
-    {
-      name = "skhd";
-      restart_service = "changed";
-    }
-    {
-      name = "yabai";
-      restart_service = "changed";
-    }
+    "skhd"
+    "yabai"
     "tmux"
     # k8s
     "kubernetes-cli"
