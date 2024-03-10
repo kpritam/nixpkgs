@@ -29,12 +29,22 @@
     enableBashIntegration = true;
   };
 
+  programs.fzf = {
+    enable = true;
+    enableZshIntegration = true;
+    defaultCommand = "fd --type f --hidden --follow --exclude .git --exclude .vim --exclude .cache --exclude vendor";
+    defaultOptions = [
+      "--border sharp"
+      "--inline-info"
+      "--bind ctrl-h:preview-down,ctrl-l:preview-up"
+    ];
+  };
+
   home.packages = with pkgs; [
     coreutils
     curl
     eza # fancy version of `ls`
     fd # fancy version of `find`
-    fzf
     ripgrep # better version of `grep`
     tealdeer # rust implementation of `tldr`
     wget

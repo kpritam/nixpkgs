@@ -22,7 +22,6 @@
   # Enhanced diffs
   programs.git.delta.enable = true;
 
-
   # GitHub CLI
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.gh.enable
   # Aliases config in ./gh-aliases.nix

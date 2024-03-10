@@ -56,6 +56,8 @@
         pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
         pritamkadam-kitty = import ./home/kitty.nix;
         pritamkadam-packages = import ./home/packages.nix;
+        pritamkadam-yabai = import ./home/yabai.nix;
+        pritamkadam-borders = import ./home/borders.nix;
 
         home-user-info = { lib, ... }: {
           options.home.user-info =

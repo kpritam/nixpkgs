@@ -2,6 +2,7 @@
   documentation.enable = false;
   documentation.doc.enable = false;
   system.defaults.NSGlobalDomain = {
+    AppleInterfaceStyle = "Dark";  # dark mode
     "com.apple.trackpad.scaling" = 3.0;
     AppleInterfaceStyleSwitchesAutomatically = true;
     AppleMeasurementUnits = "Centimeters";
@@ -27,6 +28,7 @@
   # Dock and Mission Control
   system.defaults.dock = {
     autohide = true;
+    show-recents = false;  # disable recent apps
     expose-group-by-app = false;
     mru-spaces = false;
     tilesize = 40;
@@ -48,12 +50,16 @@
 
   # Trackpad
   system.defaults.trackpad = {
-    Clicking = false;
+    Clicking = true; # enable tap to click
     TrackpadRightClick = true;
   };
 
   # Finder
   system.defaults.finder = {
-    FXEnableExtensionChangeWarning = true;
+    FXEnableExtensionChangeWarning = false;  # disable warning when changing file extension
+    ShowPathbar = true;  # show path bar
+    ShowStatusBar = true;  # show status bar
+    FXDefaultSearchScope = "SCcf"; # search current folder
+    FXPreferredViewStyle = "clmv"; # display files/folders in column view
   };
 }

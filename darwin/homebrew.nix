@@ -68,6 +68,7 @@ in
     "sf-symbols"
     "discord"
     "visual-studio-code-insiders"
+    "hiddenbar"
   ];
 
   # Configuration related to casks
@@ -80,11 +81,13 @@ in
     "angular-cli"
     "aspell"
     "awscli"
+    "colima" # docker desktop alternative
     "go"
     "neovim"
     "node"
-    "skhd"
-    "yabai"
+    "skhd" # keybinding manager
+    "yabai" # tiling window manager
+    "borders"
     "tmux"
     # k8s
     "kubernetes-cli"
@@ -98,7 +101,6 @@ in
     "shellcheck"
     "editorconfig"
     "cmake"
-    "borders"
     {
       name = "emacs-plus@30";
       args = ["with-xwidgets" "with-native-comp" "with-modern-purple-flat-icon" "with-imagemagick"];
