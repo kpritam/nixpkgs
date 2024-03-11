@@ -30,10 +30,9 @@ in
   homebrew.global.brewfile = true;
 
   homebrew.taps = [
-    "homebrew/cask"
+    "coursier/formulas"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
-    "homebrew/core"
     "homebrew/services"
     "AdoptOpenJDK/openjdk"
     "koekeishiya/formulae"
@@ -79,9 +78,11 @@ in
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
     "angular-cli"
+    "asdf"
     "aspell"
     "awscli"
     "colima" # docker desktop alternative
+    "coursier/formulas/coursier"
     "go"
     "neovim"
     "node"

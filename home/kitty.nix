@@ -14,6 +14,7 @@
     adjust_line_height = "140%";
     symbol_map = " U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols";
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
+    cursor_shape = "block";
 
     # Window layout
     hide_window_decorations = "titlebar-only";

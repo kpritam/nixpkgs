@@ -88,8 +88,9 @@
             nix.registry.my.flake = inputs.self;
           };
           inherit homeStateVersion;
+          system = "aarch64-darwin";
           homeModules = attrValues self.homeManagerModules;
         });
-      };
     };
+  };
 }
