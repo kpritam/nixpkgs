@@ -4,16 +4,24 @@
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
-  programs.bat.enable = true;
-  programs.bat.config = {
-    style = "plain";
+  programs.bat = { 
+    enable = true;
+    config = {
+      style = "numbers,changes,header";
+      theme = "OneHalfDark";
+    };
   };
 
   # Direnv, load and unload environment variables depending on the current directory.
   # https://direnv.net
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.direnv.enable
-  programs.direnv.enable = true;
-  programs.direnv.nix-direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    nix-direnv.enable = true;
+  };
+
+  programs.bash.enable = true;
 
   # Htop
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.htop.enable
@@ -39,16 +47,24 @@
       "--bind ctrl-h:preview-down,ctrl-l:preview-up"
     ];
   };
+  
+  programs.lazygit.enable = true;
+  programs.dircolors.enable = true;
+  programs.java = {
+    enable = true;
+    package = pkgs.temurin-bin-11;
+  };
 
   home.packages = with pkgs; [
     coreutils
     curl
     eza # fancy version of `ls`
     fd # fancy version of `find`
-    ripgrep # better version of `grep`
-    tealdeer # rust implementation of `tldr`
-    wget
     jq
     nixpkgs-fmt
+    ripgrep # better version of `grep`
+    sbt
+    tealdeer # rust implementation of `tldr`
+    wget
   ]; 
 }
