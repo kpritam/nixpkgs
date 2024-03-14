@@ -83,6 +83,7 @@ in
     "awscli"
     "colima" # docker desktop alternative
     "coursier/formulas/coursier"
+    "docker-compose"
     "go"
     "neovim"
     "node"
