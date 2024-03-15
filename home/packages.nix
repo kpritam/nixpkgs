@@ -63,6 +63,7 @@
     eza # fancy version of `ls`
     fd # fancy version of `find`
     jq
+    just
     nixpkgs-fmt
     ripgrep # better version of `grep`
     sbt

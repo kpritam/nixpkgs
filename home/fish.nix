@@ -71,6 +71,7 @@ in
   # Configuration that should be above `loginShellInit` and `interactiveShellInit`.
   programs.fish.shellInit = ''
     set -U fish_term24bit 1
+    fish_vi_key_bindings
   '';
 
   programs.fish.interactiveShellInit = ''
