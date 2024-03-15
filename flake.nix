@@ -51,6 +51,7 @@
       homeManagerModules = {
         pritamkadam-config-files = import ./home/config-files.nix;
         pritamkadam-fish = import ./home/fish.nix;
+        pritamkadam-nu = import ./home/nu.nix;
         pritamkadam-git = import ./home/git.nix;
         pritamkadam-git-aliases = import ./home/git-aliases.nix;
         pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
