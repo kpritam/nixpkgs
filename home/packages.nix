@@ -55,6 +55,8 @@
     package = pkgs.temurin-bin-11;
   };
 
+  programs.zellij.enable = true;
+
   home.packages = with pkgs; [
     coreutils
     curl
