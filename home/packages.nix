@@ -56,7 +56,12 @@
   };
 
   programs.zellij.enable = true;
-
+  
+  programs.emacs = {
+    enable = true;
+    package = pkgs.emacs-git;
+  };
+  
   home.packages = with pkgs; [
     coreutils
     curl

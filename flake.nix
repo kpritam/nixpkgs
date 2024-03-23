@@ -10,10 +10,15 @@
     darwin.url = "github:LnL7/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
-
+   
+    flake-utils.url = "github:numtide/flake-utils";
+    
+    emacs-overlay.url = "github:nix-community/emacs-overlay";
+    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
+    emacs-overlay.inputs.flake-utils.follows = "flake-utils";
   };
 
-  outputs = { self, darwin, home-manager, ... }@inputs:
+  outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
 
@@ -23,6 +28,9 @@
         config = {
           allowUnfree = true;
         };
+        overlays = attrValues self.overlays ++ [
+          inputs.emacs-overlay.overlays.emacs
+        ];
       };
 
       primaryUserDefaults = {
@@ -38,6 +46,15 @@
         mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
         lsnix = import ./lib/lsnix.nix;
       });
+
+      overlays = {
+        pkgs-unstable = _: prev: {
+          pkgs-unstable = import inputs.nixpkgs-unstable {
+            inherit (prev.stdenv) system;
+            inherit (nixpkgsDefaults) config;
+          };
+        };
+      };
 
       darwinModules = {
         pritamkadam-bootstrap = import ./darwin/bootstrap.nix;
@@ -93,5 +110,10 @@
           homeModules = attrValues self.homeManagerModules;
         });
     };
-  };
+  } // flake-utils.lib.eachDefaultSystem (system: {
+      # Re-export `nixpkgs-unstable` with overlays.
+      # This is handy in combination with setting `nix.registry.my.flake = inputs.self`.
+      # Allows doing things like `nix run my#prefmanager -- watch --all`
+      legacyPackages = import inputs.nixpkgs-unstable (nixpkgsDefaults // { inherit system; });
+  });
 }

@@ -34,9 +34,7 @@ in
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/services"
-    "AdoptOpenJDK/openjdk"
     "koekeishiya/formulae"
-    "d12frosted/emacs-plus"
     "FelixKratz/formulae"
   ];
 
@@ -103,9 +101,5 @@ in
     "shellcheck"
     "editorconfig"
     "cmake"
-    {
-      name = "emacs-plus@30";
-      args = ["with-xwidgets" "with-native-comp" "with-modern-purple-flat-icon" "with-imagemagick"];
-    }
   ];
 }
