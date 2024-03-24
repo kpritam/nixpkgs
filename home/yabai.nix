@@ -269,8 +269,6 @@
       ##############################################
       # Stacking
       ##############################################
-      alt - p : yabai -m window --focus stack.prev || yabai -m window --focus prev || yabai -m window --focus last
-      alt - n : yabai -m window --focus stack.next || yabai -m window --focus next || yabai -m window --focus first
       # if this doesn't work, try using the absolute path to the hammerspoon cli: /usr/local/bin/hs
       alt - t :  hs -c 'stackline.config:toggle("appearance.showIcons")'
       ctrl + alt - down : yabai -m window --stack south

@@ -71,6 +71,7 @@
     just
     nixpkgs-fmt
     ripgrep # better version of `grep`
+    rustup
     sbt
     tealdeer # rust implementation of `tldr`
     wget

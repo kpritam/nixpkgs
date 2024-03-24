@@ -16,6 +16,7 @@
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
     cursor_shape = "block";
 
+    macos_option_as_alt = "yes";
     # Window layout
     hide_window_decorations = "titlebar-only";
     scrollback_lines = "200000";
