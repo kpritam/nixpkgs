@@ -40,8 +40,8 @@
 
   # Lunarvim installs its binary at ~/.local/bin
   environment.systemPath = [ 
-    "/Users/pritamkadam/.local/bin"
-    (/Users/pritamkadam/Library + "/Application Support/Coursier/bin")
+    "/Users/pritam/.local/bin"
+    (/Users/pritam/Library + "/Application Support/Coursier/bin")
   ];
 
   # Needed to address bug where $PATH is not properly set for fish:

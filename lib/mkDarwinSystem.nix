@@ -4,7 +4,7 @@ inputs:
 , fullName
 , email
 , nixConfigDirectory # directory on the system where this flake is located
-, system ? "aarch64-darwin"
+, system ? "x86_64-darwin"
 
 # `nix-darwin` modules to include
 , modules ? [ ]

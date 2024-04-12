@@ -34,10 +34,10 @@
       };
 
       primaryUserDefaults = {
-        username = "pritamkadam";
-        fullName = "Pritam Kadam";
+        username = "pritam";
+        fullName = "Pritam";
         email = "phkadam2008@gmail.com";
-        nixConfigDirectory = "/Users/pritamkadam/.config/nixpkgs";
+        nixConfigDirectory = "/Users/pritam/.config/nixpkgs";
       };
     in
     {
@@ -57,25 +57,25 @@
       };
 
       darwinModules = {
-        pritamkadam-bootstrap = import ./darwin/bootstrap.nix;
-        pritamkadam-defaults = import ./darwin/defaults.nix;
-        pritamkadam-general = import ./darwin/general.nix;
-        pritamkadam-homebrew = import ./darwin/homebrew.nix;
+        pritam-bootstrap = import ./darwin/bootstrap.nix;
+        pritam-defaults = import ./darwin/defaults.nix;
+        pritam-general = import ./darwin/general.nix;
+        pritam-homebrew = import ./darwin/homebrew.nix;
 
         users-primaryUser = import ./modules/darwin/users.nix;
       };
 
       homeManagerModules = {
-        pritamkadam-config-files = import ./home/config-files.nix;
-        pritamkadam-fish = import ./home/fish.nix;
-        pritamkadam-nu = import ./home/nu.nix;
-        pritamkadam-git = import ./home/git.nix;
-        pritamkadam-git-aliases = import ./home/git-aliases.nix;
-        pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
-        pritamkadam-kitty = import ./home/kitty.nix;
-        pritamkadam-packages = import ./home/packages.nix;
-        pritamkadam-yabai = import ./home/yabai.nix;
-        pritamkadam-borders = import ./home/borders.nix;
+        pritam-config-files = import ./home/config-files.nix;
+        pritam-fish = import ./home/fish.nix;
+        pritam-nu = import ./home/nu.nix;
+        pritam-git = import ./home/git.nix;
+        pritam-git-aliases = import ./home/git-aliases.nix;
+        pritam-gh-aliases = import ./home/gh-aliases.nix;
+        pritam-kitty = import ./home/kitty.nix;
+        pritam-packages = import ./home/packages.nix;
+        pritam-yabai = import ./home/yabai.nix;
+        pritam-borders = import ./home/borders.nix;
 
         home-user-info = { lib, ... }: {
           options.home.user-info =
@@ -97,7 +97,7 @@
         MacBookPro = makeOverridable self.lib.mkDarwinSystem (primaryUserDefaults // {
           modules = attrValues self.darwinModules ++ singleton {
             nixpkgs = nixpkgsDefaults;
-            networking.computerName = "pritamkadam";
+            networking.computerName = "pritam";
             networking.hostName = "MacBookPro";
             networking.knownNetworkServices = [
               "Wi-Fi"
@@ -106,7 +106,6 @@
             nix.registry.my.flake = inputs.self;
           };
           inherit homeStateVersion;
-          system = "aarch64-darwin";
           homeModules = attrValues self.homeManagerModules;
         });
     };

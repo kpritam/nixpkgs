@@ -30,12 +30,9 @@ in
   homebrew.global.brewfile = true;
 
   homebrew.taps = [
-    "coursier/formulas"
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/services"
-    "koekeishiya/formulae"
-    "FelixKratz/formulae"
   ];
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -43,27 +40,21 @@ in
   homebrew.casks = [
     "1password"
     "gpg-suite"
-    "hammerspoon"
     "raycast"
     "vlc"
     "caffeine"
-    "docker"
     "flycut"
     "google-chrome"
     "arc"
-    "tuple"
     "fork"
     "insomnia"
     "jetbrains-toolbox"
     "karabiner-elements"
     "kitty"
-    "orbstack"
     "spotify"
     "stats"
     "zoom"
-    "dbeaver-community"
     "sf-symbols"
-    "discord"
     "visual-studio-code-insiders"
     "hiddenbar"
   ];
@@ -76,7 +67,6 @@ in
   # installed in `../home/default.nix` whenever possible.
   homebrew.brews = [
     "angular-cli"
-    "asdf"
     "aspell"
     "awscli"
     "colima" # docker desktop alternative
@@ -91,12 +81,8 @@ in
     "tmux"
     # k8s
     "kubernetes-cli"
-    "kubie"
     "pinentry-mac"
     "sketchybar"
-    "nvm"
-    "yarn"
-    "unixodbc"
     "shfmt"
     "shellcheck"
     "editorconfig"
