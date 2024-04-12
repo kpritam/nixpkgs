@@ -33,6 +33,9 @@ in
     "homebrew/cask-fonts"
     "homebrew/cask-versions"
     "homebrew/services"
+    "koekeishiya/formulae"
+    "felixkratz/formulae"
+    "coursier/formulas"
   ];
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -41,7 +44,7 @@ in
     "1password"
     "gpg-suite"
     "raycast"
-    "vlc"
+    # "vlc"
     "caffeine"
     "flycut"
     "google-chrome"
