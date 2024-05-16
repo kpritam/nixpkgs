@@ -61,6 +61,10 @@
     enable = true;
     package = pkgs.emacs-git;
   };
+
+  programs.starship = {
+    enable = true;
+  };
   
   home.packages = with pkgs; [
     coreutils
