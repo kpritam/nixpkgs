@@ -36,6 +36,7 @@ in
     "homebrew/services"
     "koekeishiya/formulae"
     "FelixKratz/formulae"
+    "derailed/k9s"
   ];
 
   # If an app isn't available in the Mac App Store, or the version in the App Store has
@@ -66,6 +67,7 @@ in
     "discord"
     "visual-studio-code-insiders"
     "hiddenbar"
+    "font-iosevka"
   ];
 
   # Configuration related to casks

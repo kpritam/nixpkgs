@@ -24,7 +24,6 @@
       fonts = [ 
         "JetBrainsMono"
         "Hack"
-        "Iosevka"
         "FiraCode"
         "FiraMono"
         "Inconsolata"

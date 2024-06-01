@@ -48,7 +48,6 @@
     ];
   };
   
-  programs.lazygit.enable = true;
   programs.dircolors.enable = true;
   programs.java = {
     enable = true;
@@ -79,5 +78,8 @@
     sbt
     tealdeer # rust implementation of `tldr`
     wget
+    xh # rust alternative of httpie
+    graphviz # required for plantuml
+    gitui # Blazing fast terminal-ui for Git written in Rust
   ]; 
 }
