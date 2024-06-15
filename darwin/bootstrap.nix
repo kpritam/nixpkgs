@@ -21,7 +21,8 @@
     extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [ "x86_64-darwin" "aarch64-darwin" ];
   };
 
-  nix.configureBuildUsers = true;
+  # https://github.com/LnL7/nix-darwin/issues/970
+  # nix.configureBuildUsers = true;
 
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
