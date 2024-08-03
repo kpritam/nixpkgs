@@ -65,7 +65,8 @@ in
     "dbeaver-community"
     "sf-symbols"
     "discord"
-    "visual-studio-code-insiders"
+    "visual-studio-code@insiders"
+    "zed@preview"
     "hiddenbar"
     "font-iosevka"
   ];

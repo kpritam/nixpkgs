@@ -9,7 +9,7 @@
       
       # global settings
       yabai -m config                              \
-          external_bar                all:45:0     \
+          external_bar                all:40:0     \
           mouse_follows_focus         on           \
           focus_follows_mouse         autoraise    \
           window_placement            second_child \
