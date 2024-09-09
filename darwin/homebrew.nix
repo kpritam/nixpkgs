@@ -69,6 +69,7 @@ in
     "zed@preview"
     "hiddenbar"
     "font-iosevka"
+    "font-input"
   ];
 
   # Configuration related to casks

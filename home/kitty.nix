@@ -6,13 +6,13 @@
   programs.kitty.enable = true;
 
   programs.kitty.settings = {
-    font_family = "Berkeley Mono";
-    bold_font = "JetBrains Mono Medium";
+    font_family = "Input Mono Narrow";
+    bold_font = "Input Mono Narrow";
     italic_font = "JetBrains Mono Italic";
     bold_italic_font = "JetBrains Mono Italic";
-    font_size = "17.0";
-    adjust_line_height = "140%";
-    symbol_map = " U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols";
+    font_size = "14.0";
+    adjust_line_height = "100%";
+    # symbol_map = " U+E0A0-U+E0A3,U+E0C0-U+E0C7 PowerlineSymbols";
     disable_ligatures = "cursor"; # disable ligatures when cursor is on them
     cursor_shape = "block";
 
