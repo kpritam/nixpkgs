@@ -37,7 +37,7 @@
         username = "pritamkadam";
         fullName = "Pritam Kadam";
         email = "phkadam2008@gmail.com";
-        nixConfigDirectory = "/Users/pritamkadam/.config/nixpkgs";
+        nixConfigDirectory = "~/.config/nixpkgs";
       };
     in
     {

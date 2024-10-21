@@ -32,8 +32,6 @@
     tab_activity_symbol = "";
   };
 
-  programs.kitty.theme = "Ayu Mirage";
-
   programs.kitty.keybindings = {
     "kitty_mod+t" = "new_tab_with_cwd";
     "kitty_mod+enter" = "new_window_with_cwd";

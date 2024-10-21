@@ -55,6 +55,7 @@
       
       # Unmanaged
       yabai -m rule --add label="1Password 7" app="^1Password 7$" manage=off
+      yabai -m rule --add label="Microsoft Excel" app="^Microsoft Excel$" manage=off
       yabai -m rule --add label="VLC" app="^VLC$" manage=off
       yabai -m rule --add app="^Docker Desktop$" manage=off
       yabai -m rule --add label="Activity Monitor" app="^Activity Monitor$" manage=off
