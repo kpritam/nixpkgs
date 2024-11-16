@@ -106,5 +106,6 @@ in
     "editorconfig"
     "cmake"
     "derailed/k9s/k9s"
+    "lua"
   ];
 }
