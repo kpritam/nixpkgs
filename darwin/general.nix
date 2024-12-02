@@ -18,18 +18,13 @@
 
   # Fonts
   fonts.packages = with pkgs; [
-    recursive
-    (nerdfonts.override { 
-      fonts = [ 
-        "JetBrainsMono"
-        "Hack"
-        "FiraCode"
-        "FiraMono"
-        "Inconsolata"
-        "SourceCodePro"
-        "UbuntuMono"
-      ]; 
-    })
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.hack
+      nerd-fonts.fira-code
+      nerd-fonts.fira-mono
+      nerd-fonts.inconsolata
+      nerd-fonts.sauce-code-pro
+      nerd-fonts.ubuntu-mono
    ];
 
   # Keyboard

@@ -17,8 +17,8 @@
           window_shadow               off          \
           window_animation_duration   0.25         \
           window_opacity_duration     0.25         \
-          active_window_opacity       0.90         \
-          normal_window_opacity       0.50         \
+          active_window_opacity       0.95         \
+          normal_window_opacity       0.85         \
           window_opacity              on           \
           insert_feedback_color       0xaad75f5f   \
           active_window_border_color  0xBF775759   \

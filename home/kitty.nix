@@ -5,8 +5,6 @@
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.kitty.enable
   programs.kitty.enable = true;
 
-  programs.kitty.themeFile = "gruvbox_dark";
-
   programs.kitty.settings = {
     font_family = "Input Mono Narrow";
     bold_font = "Input Mono Narrow";

@@ -29,7 +29,7 @@
   system.defaults.dock = {
     autohide = true;
     show-recents = false;  # disable recent apps
-    expose-group-by-app = false;
+    expose-group-apps = false;
     mru-spaces = false;
     tilesize = 40;
     # Disable all hot corners
