@@ -57,7 +57,6 @@ in
     "insomnia"
     "jetbrains-toolbox"
     "karabiner-elements"
-    "kitty"
     "orbstack"
     "spotify"
     "stats"
@@ -70,6 +69,7 @@ in
     "hiddenbar"
     "font-iosevka"
     "font-input"
+    "ghostty"
   ];
 
   # Configuration related to casks

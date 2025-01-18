@@ -12,9 +12,6 @@
     home-manager.url = "github:nix-community/home-manager";
    
     flake-utils.url = "github:numtide/flake-utils";
-    
-    emacs-overlay.url = "github:nix-community/emacs-overlay";
-    emacs-overlay.inputs.nixpkgs.follows = "nixpkgs-unstable";
   };
 
   outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
@@ -27,9 +24,7 @@
         config = {
           allowUnfree = true;
         };
-        overlays = attrValues self.overlays ++ [
-          inputs.emacs-overlay.overlays.emacs
-        ];
+        overlays = attrValues self.overlays;
       };
 
       primaryUserDefaults = {

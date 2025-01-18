@@ -3,7 +3,7 @@
   # Kitty terminal
   # https://sw.kovidgoyal.net/kitty/conf.html
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.kitty.enable
-  programs.kitty.enable = true;
+  # programs.kitty.enable = true;
 
   programs.kitty.settings = {
     font_family = "Input Mono Narrow";

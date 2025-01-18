@@ -36,7 +36,7 @@ in
     find = "fd";
     du = "ncdu --color dark -rr -x";
 
-    v = "lvim";
+    v = "~/.local/bin/lvim";
     vi = "nvim";
     vim = "nvim";
 

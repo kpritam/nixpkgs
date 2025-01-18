@@ -256,17 +256,6 @@
       # destroy desktop
       cmd + alt - w : yabai -m space --destroy
       
-      # Enable / Disable gaps in current workspace
-      lcmd - i : yabai -m space --toggle padding; \
-      	  yabai -m space --toggle gap; \
-      	  yabai -m config external_bar off:0:0; \
-      	  sketchybar --bar hidden=true;
-      
-      rcmd - i : yabai -m space --toggle padding; \
-      	 yabai -m space --toggle gap; \
-      	 yabai -m config external_bar all:60:0;\
-      	 sketchybar --bar hidden=false;
-      
       ##############################################
       # Stacking
       ##############################################
