@@ -1,7 +1,6 @@
-{ config, lib, pkgs, ... }:
+{ config, pkgs, ... }:
 
 let
-  inherit (lib) elem optionalString;
   inherit (config.home.user-info) nixConfigDirectory;
 in
 
@@ -16,7 +15,7 @@ in
   # Aliases
   programs.fish.shellAliases = with pkgs; {
     drb = "darwin-rebuild build --flake ${nixConfigDirectory}";
-    drs = "darwin-rebuild switch --flake ${nixConfigDirectory}";
+    drs = "sudo darwin-rebuild switch --flake ${nixConfigDirectory}";
     flakeup = "nix flake update ${nixConfigDirectory}";
     nb = "nix build";
     nd = "nix develop";
@@ -76,7 +75,6 @@ in
 
   programs.fish.interactiveShellInit = ''
     set -g fish_greeting ""
-    ${pkgs.thefuck}/bin/thefuck --alias | source
 
     # Set Fish colors that aren't dependant the `$term_background`.
     set -g fish_color_quote        cyan      # color of commands

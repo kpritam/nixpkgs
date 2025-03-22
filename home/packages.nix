@@ -4,7 +4,7 @@
   # Bat, a substitute for cat.
   # https://github.com/sharkdp/bat
   # https://rycee.gitlab.io/home-manager/options.html#opt-programs.bat.enable
-  programs.bat = { 
+  programs.bat = {
     enable = true;
     config = {
       style = "numbers,changes,header";
@@ -47,24 +47,28 @@
       "--bind ctrl-h:preview-down,ctrl-l:preview-up"
     ];
   };
-  
+
   programs.dircolors.enable = true;
   programs.java = {
     enable = true;
     package = pkgs.temurin-bin-11;
   };
 
-  programs.zellij.enable = true;
-  
+  programs.zellij.enable = false;
+
   programs.emacs = {
     enable = true;
+    package = pkgs.emacs.override { withNativeCompilation = false; };
   };
 
   programs.starship = {
     enable = true;
   };
-  
+
   home.packages = with pkgs; [
+    libgccjit
+    gcc
+    nixd
     coreutils
     curl
     eza # fancy version of `ls`
@@ -80,5 +84,5 @@
     xh # rust alternative of httpie
     graphviz # required for plantuml
     gitui # Blazing fast terminal-ui for Git written in Rust
-  ]; 
+  ];
 }

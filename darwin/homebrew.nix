@@ -48,7 +48,6 @@ in
     "raycast"
     "vlc"
     "caffeine"
-    "docker"
     "flycut"
     "google-chrome"
     "arc"
@@ -61,7 +60,7 @@ in
     "spotify"
     "stats"
     "zoom"
-    "dbeaver-community"
+    "dbeaver-enterprise"
     "sf-symbols"
     "discord"
     "visual-studio-code@insiders"
@@ -107,5 +106,8 @@ in
     "cmake"
     "derailed/k9s/k9s"
     "lua"
+    "rustup"
+    "uv"
+    "ast-grep"
   ];
 }

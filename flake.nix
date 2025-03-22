@@ -7,10 +7,10 @@
     nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
 
     # Environment/system management
-    darwin.url = "github:LnL7/nix-darwin";
+    darwin.url = "github:nix-darwin/nix-darwin";
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = "github:nix-community/home-manager";
-   
+
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -18,7 +18,7 @@
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
 
-      homeStateVersion = "24.05";
+      homeStateVersion = "25.11";
 
       nixpkgsDefaults = {
         config = {
@@ -66,7 +66,6 @@
         pritamkadam-git = import ./home/git.nix;
         pritamkadam-git-aliases = import ./home/git-aliases.nix;
         pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
-        pritamkadam-kitty = import ./home/kitty.nix;
         pritamkadam-packages = import ./home/packages.nix;
         pritamkadam-yabai = import ./home/yabai.nix;
         pritamkadam-borders = import ./home/borders.nix;
@@ -76,7 +75,7 @@
             (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
         };
       };
-      
+
       darwinConfigurations = {
         # Minimal macOS configurations to bootstrap systems
         bootstrap-x86 = makeOverridable darwin.lib.darwinSystem {
