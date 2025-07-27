@@ -1,3 +1,4 @@
+```
 { config, lib, ... }:
 
 let
@@ -48,6 +49,7 @@ in
     "raycast"
     "vlc"
     "caffeine"
+    "figma"
     "flycut"
     "google-chrome"
     "arc"
@@ -104,10 +106,4 @@ in
     "shellcheck"
     "editorconfig"
     "cmake"
-    "derailed/k9s/k9s"
-    "lua"
-    "rustup"
-    "uv"
-    "ast-grep"
-  ];
-}
+    "derailed/k9
