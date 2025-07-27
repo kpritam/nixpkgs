@@ -1,4 +1,7 @@
+```
 # My Nix Configs
+
+Hello world!
 
 ![Build Nix envs](https://github.com/malob/nixpkgs/workflows/Build%20Nix%20envs/badge.svg)
 
@@ -29,15 +32,4 @@ In no particular order:
       * `useSymbolsFromNerdFont` option to use symbols from a NerdFont while using any font with Kitty.
     * [`malo-git-aliases`](./home/git-aliases.nix)
     * [`malo-gh-aliases`](./home/gh-aliases.nix)
-  * Support for non-flake compatible versions of Nix and legacy workflows through [`flake-compat`](https://nixos.wiki/wiki/Flakes#Using_flakes_project_from_a_legacy_Nix):
-    * [`default.nix`](./default.nix), allows traditional Nix commands like `nix-build` to operate on the flake inputs/outputs.
-    * [`nixpkgs.nix`](./nixpkgs.nix), functions as a wrapper for the `nixpkgs` input of the flake. This can be used for things like setting `<nixpkgs>` by, e.g., setting `nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };` in `nix-darwin`.
-* Support for Macs with Apple Silicon including ability to easily overlay in x86 version of packages, when they don't build on arm. Search `pkgs-x86` in [`flake.nix`](./flake.nix) and see `nix.extraOptions` in [`darwin/bootstrap.nix`](./darwin/bootstrap.nix) for details.
-* A GitHub [workflow](./.github/workflows/ci.yml) that builds the my macOS system `nix-darwin` config and `home-manager` Linux user config, and updates a Cachix cache. Also, once a week it updates all the flake inputs before building, and if the build succeeds, it commits the changes.
-* [Git config](./home/git.nix) with a bunch of handy aliases and better diffs using [`delta`](https://github.com/dandavison/delta),
-* A slick Neovim 0.6 [config](./configs/nvim) in Lua (some bugs probably exist due to recent update to 0.6). See also: [`neovim.nix`](./home/neovim.nix).
-* Unified colorscheme (based on [Solarized](https://ethanschoonover.com/solarized/)) with light and dark variant for [Kitty terminal](https://sw.kovidgoyal.net/kitty), [Fish shell](https://fishshell.com), [Neovim](https://neovim.io), and other tools, where toggling between light and dark can be done for all of them simultaneously by calling a Fish function. This is achieved by:
-  * adding Solarized colors to `pkgs` via an [overlay](./overlays/colors.nix);
-  * using my `programs-kitty-extras` `home-manager` module (see above);
-  * using a self-made WIP Solarized based [colorscheme](./configs/nvim/lua/malo/theme.lua) with Neovim; and
-  * a [Fish shell config](./home/fish.nix), which provides a `toggle-background` function (and an alias `tb`) which toggles a universal environment variable (`$term_background`) between the values `"light"` and `"dark"`, along with `set-shell-colors` function which trigger automatically when `$term_background` changes.
+  * Support for non-flake compatible versions of Nix and legacy workflows through [`flake-compat`](https://nixos.wiki/wiki/Flakes#Using_flakes_project_from_a_legacy_Nix
