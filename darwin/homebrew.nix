@@ -69,6 +69,7 @@ in
     "font-iosevka"
     "font-input"
     "ghostty"
+    "lm-studio"
   ];
 
   # Configuration related to casks
