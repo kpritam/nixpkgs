@@ -39,76 +39,106 @@ in
     "derailed/k9s"
   ];
 
-  # If an app isn't available in the Mac App Store, or the version in the App Store has
-  # limitiations, e.g., Transmit, install the Homebrew Cask.
+  # Applications not available in Mac App Store or with limitations
   homebrew.casks = [
+    # Security & Password Management
     "1password"
     "gpg-suite"
-    "hammerspoon"
-    "raycast"
-    "vlc"
-    "caffeine"
-    "flycut"
+    
+    # System Utilities
+    "hammerspoon"        # Window management and automation
+    "raycast"           # Better Spotlight alternative
+    "caffeine"          # Prevent sleep
+    "flycut"            # Clipboard manager
+    "hiddenbar"         # Hide menu bar items
+    "stats"             # System monitoring
+    "karabiner-elements" # Keyboard customization
+    
+    # Development Tools
+    "jetbrains-toolbox" # JetBrains IDE manager
+    "visual-studio-code@insiders" # VS Code Insiders
+    "zed@preview"       # Modern editor
+    "fork"              # Git client
+    "insomnia"          # API testing
+    "orbstack"          # Docker alternative
+    "dbeaver-enterprise" # Database tool
+    "sf-symbols"        # Apple's SF Symbols
+    "ghostty"           # Terminal emulator
+    
+    # Browsers
     "google-chrome"
-    "arc"
-    "tuple"
-    "fork"
-    "insomnia"
-    "jetbrains-toolbox"
-    "karabiner-elements"
-    "orbstack"
-    "spotify"
-    "stats"
-    "zoom"
-    "dbeaver-enterprise"
-    "sf-symbols"
-    "discord"
-    "visual-studio-code@insiders"
-    "zed@preview"
-    "hiddenbar"
-    "font-iosevka"
-    "font-input"
-    "ghostty"
-    "lm-studio"
+    "arc"               # Modern browser
+    
+    # Media & Communication
+    "vlc"               # Video player
+    "spotify"           # Music streaming
+    "discord"           # Communication
+    "zoom"              # Video conferencing
+    "tuple"             # Pair programming
+    
+    # Fonts
+    "font-iosevka"      # Programming font
+    "font-input"        # Programming font
+    
+    # AI/ML Tools
+    "lm-studio"         # Local LLM runner
   ];
 
   # Configuration related to casks
   environment.variables.SSH_AUTH_SOCK = mkIfCaskPresent "secretive"
     "/Users/${config.users.primaryUser.username}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
 
-  # For cli packages that aren't currently available for macOS in `nixpkgs`.Packages should be
-  # installed in `../home/default.nix` whenever possible.
+  # CLI packages not available or newer in nixpkgs
+  # Prefer nixpkgs when possible for reproducibility
   homebrew.brews = [
-    "angular-cli"
-    "asdf"
-    "aspell"
-    "awscli"
-    "colima" # docker desktop alternative
-    "coursier/formulas/coursier"
-    "docker-compose"
-    "go"
-    "neovim"
-    "node"
-    "skhd" # keybinding manager
-    "yabai" # tiling window manager
-    "borders"
-    "tmux"
-    # k8s
-    "kubernetes-cli"
-    "kubie"
-    "pinentry-mac"
-    "sketchybar"
-    "nvm"
-    "yarn"
-    "unixodbc"
-    "shfmt"
-    "shellcheck"
-    "editorconfig"
-    "cmake"
-    "derailed/k9s/k9s"
-    "lua"
-    "rustup"
-    "uv"
-    "ast-grep"
+    # Development Languages & Runtimes
+    "go"                # Go programming language
+    "node"              # Node.js runtime
+    "lua"               # Lua scripting language
+    "rustup"            # Rust toolchain installer
+    "uv"                # Fast Python package installer
+    
+    # Development Tools
+    "neovim"            # Text editor
+    "angular-cli"       # Angular development
+    "coursier/formulas/coursier" # Scala build tool
+    "cmake"             # Build system
+    "editorconfig"      # Editor configuration
+    "ast-grep"          # Code search and transformation
+    
+    # Version Managers
+    "asdf"              # Multi-language version manager
+    "nvm"               # Node.js version manager
+    
+    # Package Managers & Build Tools
+    "yarn"              # JavaScript package manager
+    
+    # System & Shell Tools
+    "tmux"              # Terminal multiplexer
+    "skhd"              # Keybinding manager for yabai
+    "yabai"             # Tiling window manager
+    "borders"           # Window borders for yabai
+    "sketchybar"        # Custom menu bar
+    
+    # Container & Cloud Tools
+    "colima"            # Docker Desktop alternative
+    "docker-compose"    # Container orchestration
+    "awscli"            # AWS command line
+    
+    # Kubernetes Tools
+    "kubernetes-cli"    # kubectl
+    "kubie"             # Kubernetes context switcher
+    "derailed/k9s/k9s" # Kubernetes TUI
+    
+    # Code Quality & Formatting
+    "shfmt"             # Shell formatter
+    "shellcheck"        # Shell script linter
+    
+    # Security & GPG
+    "pinentry-mac"      # GPG PIN entry for macOS
+    
+    # Language Support
+    "aspell"            # Spell checker
+    "unixodbc"          # Database connectivity
   ];
 }

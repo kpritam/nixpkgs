@@ -1,43 +1,167 @@
-# My Nix Configs
+# Pritam's Nix-Darwin Configuration
 
-![Build Nix envs](https://github.com/malob/nixpkgs/workflows/Build%20Nix%20envs/badge.svg)
+A modern, declarative macOS system configuration using [nix-darwin](https://github.com/nix-darwin/nix-darwin) and [Home Manager](https://github.com/nix-community/home-manager).
 
-This repo contains my Nix configs for macOS and Linux and by extension, configuration for most tools/programs I use, at least in the terminal.
+## 🚀 Quick Start
 
-I'm continuously tweaking/improving my setup, trying to find ways to make more of my configuration declarative, and I like experimenting with bleeding edge updates/features, so this repo sees a lot of changes. I do try to ensure that `master` always builds and doesn't have any bad bugs (at least in my workflow), and keep the code fairly well documented.
+### Prerequisites
+1. Install Nix with flakes support:
+   ```bash
+   curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+   ```
 
-Feel free to file an [issue](https://github.com/malob/nixpkgs/issues) or start a [discussion](https://github.com/malob/nixpkgs/discussions) if you find a bug, or think something is broken, or think I'm doing something in a dumb/clumsy way and have a suggestion for a more elegant alternative, or try to crib something from my config but just can't get it working, or are looking at my config and think to yourself "does this guy know about X, cause I bet he'd be into it", or have some other type of feedback/comment. (Issues, are better for things that are actually issues, while discussions are better for ideas, questions, etc.)
+2. Clone and apply this configuration:
+   ```bash
+   git clone <your-repo-url> ~/.config/nixpkgs
+   cd ~/.config/nixpkgs
+   nix flake update
+   darwin-rebuild switch --flake .#MacBookPro
+   ```
 
-I make no promises that I'll respond quickly, or fix the bug (especially if I'm not experiencing it), or whatever, but you definitely shouldn't feel like you're imposing in any way, and I probably will respond within a few days.
+## ✨ What's Included
 
-Below, I've highlighted stuff that I'm particularly happy with or think others might find helpful/useful.
+### 🔒 Security & Privacy
+- TouchID authentication for sudo
+- Application firewall enabled with stealth mode
+- Secure system defaults
+- Privacy-focused DNS (Cloudflare + Google)
 
-## Highlights
+### 💻 Development Environment
+- **Editors**: VS Code Insiders, Zed Preview, Neovim, Emacs
+- **Version Control**: Git with delta diffs, GitHub CLI
+- **Languages**: Go, Node.js, Rust, Python (uv), Lua
+- **Tools**: Docker alternatives (OrbStack, Colima), Kubernetes tools, AWS CLI
 
-In no particular order:
+### 🎨 UI/UX Enhancements  
+- **Window Management**: Yabai + skhd for tiling
+- **Productivity**: Raycast, Hammerspoon automation
+- **Fonts**: Nerd Fonts collection for programming
+- **Terminal**: Modern shell tools (bat, eza, fd, ripgrep, zoxide)
 
-* [Flakes](./flake.nix)!
-  * All external dependencies managed through flakes for easy updating.
-  * Outputs for [`nix-darwin`](https://github.com/LnL7/nix-darwin) macOS system configurations (using `home-manager` as a `nix-darwin` module) and a [`home-manager`](https://github.com/nix-community/home-manager) user configuration for Linux.
-  * `darwinModules` output for `nix-darwin` modules that are pending upstream:
-    * [`security-pam`](./modules/darwin/security/pam.nix) that provides an option, `enableSudoTouchIdAuth`, which enables using Touch ID for `sudo` authentication. (Pending upstream PR [#228](https://github.com/LnL7/nix-darwin/pull/228).)
-    * [`programs-nix-index`](./modules/darwin/programs/nix-index.nix) that augments `nix-darwins`'s `programs.nix-index` module with a command not found handler for Fish. (Pending upstream PR [#272](https://github.com/LnL7/nix-darwin/pull/272).)
-  * `homeManagerModules` output for `home-manager` modules with additional functionality and prepackaged configuration:
-    * [`programs-neovim-extras`](./modules/home/programs/neovim/extras.nix) that provides `termBufferAutoChangeDir`, and `nvrAliases` options.
-    * [`programs-kitty-extras`](./modules/home/programs/kitty/extras.nix) that provides a,
-      * `colors` option to configure a light and dark colorscheme, which when used also adds `term-light`, `term-dark`, and `term-background` scripts to `home.packages` to easily switch between them; and
-      * `useSymbolsFromNerdFont` option to use symbols from a NerdFont while using any font with Kitty.
-    * [`malo-git-aliases`](./home/git-aliases.nix)
-    * [`malo-gh-aliases`](./home/gh-aliases.nix)
-  * Support for non-flake compatible versions of Nix and legacy workflows through [`flake-compat`](https://nixos.wiki/wiki/Flakes#Using_flakes_project_from_a_legacy_Nix):
-    * [`default.nix`](./default.nix), allows traditional Nix commands like `nix-build` to operate on the flake inputs/outputs.
-    * [`nixpkgs.nix`](./nixpkgs.nix), functions as a wrapper for the `nixpkgs` input of the flake. This can be used for things like setting `<nixpkgs>` by, e.g., setting `nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };` in `nix-darwin`.
-* Support for Macs with Apple Silicon including ability to easily overlay in x86 version of packages, when they don't build on arm. Search `pkgs-x86` in [`flake.nix`](./flake.nix) and see `nix.extraOptions` in [`darwin/bootstrap.nix`](./darwin/bootstrap.nix) for details.
-* A GitHub [workflow](./.github/workflows/ci.yml) that builds the my macOS system `nix-darwin` config and `home-manager` Linux user config, and updates a Cachix cache. Also, once a week it updates all the flake inputs before building, and if the build succeeds, it commits the changes.
-* [Git config](./home/git.nix) with a bunch of handy aliases and better diffs using [`delta`](https://github.com/dandavison/delta),
-* A slick Neovim 0.6 [config](./configs/nvim) in Lua (some bugs probably exist due to recent update to 0.6). See also: [`neovim.nix`](./home/neovim.nix).
-* Unified colorscheme (based on [Solarized](https://ethanschoonover.com/solarized/)) with light and dark variant for [Kitty terminal](https://sw.kovidgoyal.net/kitty), [Fish shell](https://fishshell.com), [Neovim](https://neovim.io), and other tools, where toggling between light and dark can be done for all of them simultaneously by calling a Fish function. This is achieved by:
-  * adding Solarized colors to `pkgs` via an [overlay](./overlays/colors.nix);
-  * using my `programs-kitty-extras` `home-manager` module (see above);
-  * using a self-made WIP Solarized based [colorscheme](./configs/nvim/lua/malo/theme.lua) with Neovim; and
-  * a [Fish shell config](./home/fish.nix), which provides a `toggle-background` function (and an alias `tb`) which toggles a universal environment variable (`$term_background`) between the values `"light"` and `"dark"`, along with `set-shell-colors` function which trigger automatically when `$term_background` changes.
+### 📦 Package Management
+- **Nix**: Reproducible system and user packages
+- **Homebrew**: GUI applications and tools not in nixpkgs
+- **Home Manager**: Declarative user environment
+
+## 🏗 Architecture
+
+This configuration follows modern Nix best practices:
+
+### Flake-based Configuration
+- All dependencies managed through [`flake.nix`](./flake.nix)
+- Pinned inputs for reproducibility
+- Support for both stable and unstable nixpkgs
+
+### Modular Structure
+- **System Level**: [`darwin/`](./darwin/) - macOS system configuration
+- **User Level**: [`home/`](./home/) - User-specific settings via Home Manager  
+- **Libraries**: [`lib/`](./lib/) - Reusable helper functions
+- **Custom Modules**: [`modules/`](./modules/) - Extended functionality
+
+### Key Features
+- **Legacy Compatibility**: [`default.nix`](./default.nix) via flake-compat
+- **Optimized Performance**: Binary caches, auto-optimization enabled
+- **Apple Silicon Support**: Native aarch64-darwin configuration
+- **Secure Defaults**: Hardened system preferences
+
+## 🛠 Usage
+
+### Daily Commands
+```bash
+# Rebuild system configuration
+darwin-rebuild switch --flake .
+
+# Update all dependencies
+nix flake update
+
+# Check configuration before building
+nix flake check
+
+# Build without switching (for testing)
+darwin-rebuild build --flake .
+```
+
+### Maintenance
+```bash
+# Clean up old generations
+darwin-rebuild --list-generations
+nix-collect-garbage -d
+
+# Optimize Nix store
+nix store optimise
+
+# Update specific input
+nix flake lock --update-input nixpkgs-unstable
+```
+
+## 📝 Customization
+
+### Personal Information
+Update user details in [`flake.nix`](./flake.nix):
+```nix
+primaryUserDefaults = {
+  username = "pritamkadam";
+  fullName = "Pritam Kadam";
+  email = "phkadam2008@gmail.com";
+  nixConfigDirectory = "~/.config/nixpkgs";
+};
+```
+
+### Adding Packages
+- **Nix packages**: Add to [`home/packages.nix`](./home/packages.nix)
+- **Homebrew casks**: Add to [`darwin/homebrew.nix`](./darwin/homebrew.nix)
+- **System tools**: Add to [`home/packages.nix`](./home/packages.nix) or homebrew
+
+### System Preferences
+Modify [`darwin/defaults.nix`](./darwin/defaults.nix) for:
+- macOS system defaults
+- Security settings
+- UI preferences
+
+## 🔍 File Structure
+
+```
+.
+├── flake.nix              # Main flake configuration
+├── flake.lock            # Dependency lock file
+├── default.nix           # Legacy compatibility
+├── darwin/               # macOS system configuration
+│   ├── defaults.nix      # System defaults & security
+│   ├── general.nix       # General system settings  
+│   ├── homebrew.nix      # Homebrew packages
+│   └── bootstrap.nix     # Minimal bootstrap config
+├── home/                 # Home Manager configuration
+│   ├── packages.nix      # User packages & programs
+│   ├── git.nix          # Git configuration
+│   ├── fish.nix         # Fish shell setup
+│   └── *.nix            # Other configurations
+├── lib/                  # Reusable functions
+│   └── mkDarwinSystem.nix # Darwin system builder
+└── modules/              # Custom modules
+    └── darwin/
+        └── users.nix     # User management
+```
+
+## 🚀 Getting Started
+
+1. **Fork this repository** and customize the personal information
+2. **Review packages** in homebrew.nix and packages.nix  
+3. **Adjust system defaults** in darwin/defaults.nix to your preferences
+4. **Test the configuration** with `darwin-rebuild build --flake .`
+5. **Apply changes** with `darwin-rebuild switch --flake .`
+
+## 🐛 Troubleshooting
+
+### Common Issues
+- **Build failures**: Run `nix flake check` to validate syntax
+- **Permission errors**: Ensure you're in the admin group
+- **Homebrew conflicts**: Avoid duplicate packages between Nix and Homebrew
+
+### Resources
+- [Nix-Darwin Manual](https://nix-darwin.github.io/nix-darwin/manual/)
+- [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
+- [Nixpkgs Search](https://search.nixos.org/packages)
+
+## 📄 License
+
+This configuration is provided as-is for educational purposes. Feel free to use and modify.

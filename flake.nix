@@ -1,15 +1,21 @@
 {
-  description = "Pritam’s Nix system configs";
+  description = "Pritam's declarative macOS system configuration with nix-darwin and Home Manager";
 
   inputs = {
     # Package sets
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixos-stable.url = "github:NixOS/nixpkgs/nixos-22.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
 
     # Environment/system management
-    darwin.url = "github:nix-darwin/nix-darwin";
-    darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
-    home-manager.url = "github:nix-community/home-manager";
+    darwin = {
+      url = "github:nix-darwin/nix-darwin";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+    
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
 
     flake-utils.url = "github:numtide/flake-utils";
   };
@@ -18,7 +24,7 @@
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
 
-      homeStateVersion = "25.11";
+      homeStateVersion = "24.11";
 
       nixpkgsDefaults = {
         config = {

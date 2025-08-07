@@ -23,6 +23,7 @@ inputs:
 
 inputs.darwin.lib.darwinSystem {
   inherit system;
+  specialArgs = { inherit inputs; };
   modules = modules ++ extraModules ++ [
     inputs.home-manager.darwinModules.home-manager
     ({ config, ... }: {
@@ -37,6 +38,7 @@ inputs.darwin.lib.darwinSystem {
       users.users.${username}.home = "/Users/${username}";
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
+      home-manager.extraSpecialArgs = { inherit inputs; };
       home-manager.users.${username} = {
         imports = homeModules ++ extraHomeModules;
         home.stateVersion = homeStateVersion;
