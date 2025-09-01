@@ -57,6 +57,7 @@ in
     # Development Tools
     "jetbrains-toolbox" # JetBrains IDE manager
     "visual-studio-code@insiders" # VS Code Insiders
+    "visual-studio-code"
     "zed@preview"       # Modern editor
     "fork"              # Git client
     "insomnia"          # API testing
@@ -64,6 +65,7 @@ in
     "dbeaver-enterprise" # Database tool
     "sf-symbols"        # Apple's SF Symbols
     "ghostty"           # Terminal emulator
+    "figma"
     
     # Browsers
     "google-chrome"
@@ -140,5 +142,9 @@ in
     # Language Support
     "aspell"            # Spell checker
     "unixodbc"          # Database connectivity
+
+    # AI/ML Tools
+    "sst/tap/opencode"
+    "lazygit"
   ];
 }
