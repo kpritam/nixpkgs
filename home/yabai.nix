@@ -19,7 +19,7 @@
           window_opacity_duration     0.25         \
           active_window_opacity       0.95         \
           normal_window_opacity       0.85         \
-          window_opacity              on           \
+          window_opacity              off          \
           insert_feedback_color       0xaad75f5f   \
           active_window_border_color  0xBF775759   \
           normal_window_border_color  0x7f353535   \

@@ -7,7 +7,7 @@
   programs.git.enable = true;
 
   programs.git.extraConfig = {
-    core.editor = "lvim";
+    core.editor = "nvim";
     diff.colorMoved = "default";
     pull.rebase = true;
   };

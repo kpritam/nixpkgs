@@ -84,6 +84,8 @@ in
     
     # AI/ML Tools
     "lm-studio"         # Local LLM runner
+
+    "espanso"
   ];
 
   # Configuration related to casks
@@ -107,6 +109,7 @@ in
     "cmake"             # Build system
     "editorconfig"      # Editor configuration
     "ast-grep"          # Code search and transformation
+    "btop"
     
     # Version Managers
     "asdf"              # Multi-language version manager

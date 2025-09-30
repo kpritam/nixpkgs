@@ -35,7 +35,7 @@ in
     find = "fd";
     du = "ncdu --color dark -rr -x";
 
-    v = "~/.local/bin/lvim";
+    v = "nvim";
     vi = "nvim";
     vim = "nvim";
 
@@ -71,6 +71,10 @@ in
   programs.fish.shellInit = ''
     set -U fish_term24bit 1
     fish_vi_key_bindings
+
+     fish_add_path  ~/Library/Application\ Support/Coursier/bin/
+
+     fish_add_path  $HOME/.bun/bin
   '';
 
   programs.fish.interactiveShellInit = ''
