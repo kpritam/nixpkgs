@@ -83,14 +83,6 @@
     wget
     xh # rust alternative of httpie
     graphviz # required for plantuml
-    (pkgs.gitui.overrideAttrs (old: {
-      version = "0.26.1";
-      src = pkgs.fetchFromGitHub {
-        owner = "extrawurst";
-        repo = "gitui";
-        rev = "v0.26.1";
-        sha256 = "sha256-JqxZbxjZrrdsXWhpYu0E9F18gMldtOLrAYd+uiY8IcQ=";
-      };
-    })) # Temporarily use a working version of gitui
+    # gitui # Temporarily removed due to ARM64 build issues - can be re-added later
   ];
 }
