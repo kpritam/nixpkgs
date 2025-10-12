@@ -83,6 +83,14 @@
     wget
     xh # rust alternative of httpie
     graphviz # required for plantuml
-    gitui # Blazing fast terminal-ui for Git written in Rust
+    (pkgs.gitui.overrideAttrs (old: {
+      version = "0.26.1";
+      src = pkgs.fetchFromGitHub {
+        owner = "extrawurst";
+        repo = "gitui";
+        rev = "v0.26.1";
+        sha256 = "sha256-1i117hkblzl707my5d2xr607qpgl0knn4sb8bmnbgbnr31pmkb16";
+      };
+    })) # Temporarily use a working version of gitui
   ];
 }
