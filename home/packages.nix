@@ -83,6 +83,6 @@
     wget
     xh # rust alternative of httpie
     graphviz # required for plantuml
-    # gitui # Temporarily removed due to ARM64 build issues - can be re-added later
+
   ];
 }
