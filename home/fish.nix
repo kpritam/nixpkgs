@@ -68,14 +68,16 @@ in
   };
 
   # Configuration that should be above `loginShellInit` and `interactiveShellInit`.
-  programs.fish.shellInit = ''
-    set -U fish_term24bit 1
-    fish_vi_key_bindings
+   programs.fish.shellInit = ''
+     set -U fish_term24bit 1
+     fish_vi_key_bindings
 
-     fish_add_path  ~/Library/Application\ Support/Coursier/bin/
+      fish_add_path  ~/Library/Application\ Support/Coursier/bin/
 
-     fish_add_path  $HOME/.bun/bin
-  '';
+      fish_add_path  $HOME/.bun/bin
+
+      fish_add_path  $HOME/.local/bin
+   '';
 
   programs.fish.interactiveShellInit = ''
     set -g fish_greeting ""
