@@ -89,7 +89,7 @@
         owner = "extrawurst";
         repo = "gitui";
         rev = "v0.26.1";
-        sha256 = "sha256-1i117hkblzl707my5d2xr607qpgl0knn4sb8bmnbgbnr31pmkb16";
+        sha256 = "sha256-JqxZbxjZrrdsXWhpYu0E9F18gMldtOLrAYd+uiY8IcQ=";
       };
     })) # Temporarily use a working version of gitui
   ];
