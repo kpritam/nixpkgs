@@ -54,10 +54,10 @@ in
     p = "cd ~/projects";
     my = "cd ~/projects/kpritam";
     #  git
-    root = "cd (${pkgs.gitAndTools.git}/bin/git rev-parse --show-cdup)";
-    gpom = "${pkgs.gitAndTools.git}/bin/git push origin master";
-    gpr = "${pkgs.gitAndTools.git}/bin/git pull --rebase";
-    g = "${pkgs.gitAndTools.git}/bin/git";
+    root = "cd (${pkgs.git}/bin/git rev-parse --show-cdup)";
+    gpom = "${pkgs.git}/bin/git push origin master";
+    gpr = "${pkgs.git}/bin/git pull --rebase";
+    g = "${pkgs.git}/bin/git";
     r = "${pkgs.ranger}/bin/ranger";
 
     c = "code-insiders";

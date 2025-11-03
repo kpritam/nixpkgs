@@ -138,6 +138,8 @@ in
     # Code Quality & Formatting
     "shfmt"             # Shell formatter
     "shellcheck"        # Shell script linter
+    "biome"             # JavaScript/TypeScript toolchain
+    "ffmpeg"            # Multimedia framework
     
     # Security & GPG
     "pinentry-mac"      # GPG PIN entry for macOS

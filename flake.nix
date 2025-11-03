@@ -4,7 +4,7 @@
   inputs = {
     # Package sets
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-24.11";
+    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
 
     # Environment/system management
     darwin = {
@@ -24,7 +24,7 @@
     let
       inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
 
-      homeStateVersion = "24.11";
+      homeStateVersion = "25.05";
 
       nixpkgsDefaults = {
         config = {
