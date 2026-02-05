@@ -10,7 +10,7 @@ in
   programs.fish.enable = true;
 
   # Add Fish plugins
-  home.packages = [ pkgs.fishPlugins.done ];
+  home.packages = [ pkgs.fishPlugins.done pkgs.fishPlugins.bass ];
 
   # Aliases
   programs.fish.shellAliases = with pkgs; {
@@ -82,6 +82,11 @@ in
   programs.fish.interactiveShellInit = ''
     set -g fish_greeting ""
 
+    # Load NVM
+    if test -f /opt/homebrew/opt/nvm/nvm.sh
+      bass source /opt/homebrew/opt/nvm/nvm.sh
+    end
+
     # Set Fish colors that aren't dependant the `$term_background`.
     set -g fish_color_quote        cyan      # color of commands
     set -g fish_color_redirection  brmagenta # color of IO redirections
@@ -91,7 +96,7 @@ in
     set -g fish_color_search_match --background=yellow
     set -g fish_color_selection    --reverse # color of selected text (vi mode)
     set -g fish_color_operator     green     # color of parameter expansion operators like '*' and '~'
-    set -g fish_color_escape       red       # color of character escapes like '\n' and and '\x70'
+    set -g fish_color_escape       red       # color of character escapes like '\n' and '\x70'
     set -g fish_color_cancel       red       # color of the '^C' indicator on a canceled command
   '';
 }
