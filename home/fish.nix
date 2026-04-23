@@ -82,11 +82,6 @@ in
   programs.fish.interactiveShellInit = ''
     set -g fish_greeting ""
 
-    # Load NVM
-    if test -f /opt/homebrew/opt/nvm/nvm.sh
-      bass source /opt/homebrew/opt/nvm/nvm.sh
-    end
-
     # Set Fish colors that aren't dependant the `$term_background`.
     set -g fish_color_quote        cyan      # color of commands
     set -g fish_color_redirection  brmagenta # color of IO redirections

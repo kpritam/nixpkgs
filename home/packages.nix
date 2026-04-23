@@ -23,11 +23,6 @@
 
   programs.bash.enable = true;
 
-  # Htop
-  # https://nix-community.github.io/home-manager/options.html#opt-programs.htop.enable
-  programs.htop.enable = true;
-  programs.htop.settings.show_program_path = true;
-
   # Zoxide, a faster way to navigate the filesystem
   # https://github.com/ajeetdsouza/zoxide
   # https://nix-community.github.io/home-manager/options.html#opt-programs.zoxide.enable
@@ -51,38 +46,33 @@
   programs.dircolors.enable = true;
   programs.java = {
     enable = true;
-    package = pkgs.temurin-bin-11;
+    package = pkgs.temurin-bin-21;
   };
-
-  programs.zellij.enable = false;
 
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs.override { withNativeCompilation = false; };
+    package = pkgs.emacs;
   };
 
   programs.starship = {
     enable = true;
+    enableFishIntegration = false;
   };
 
   home.packages = with pkgs; [
-    libgccjit
-    gcc
-    nixd
     coreutils
     curl
     eza # fancy version of `ls`
     fd # fancy version of `find`
     jq
     just
+    nixd
     nixpkgs-fmt
     ripgrep # better version of `grep`
-    rustup
     sbt
     tealdeer # rust implementation of `tldr`
     wget
     xh # rust alternative of httpie
     graphviz # required for plantuml
-
   ];
 }

@@ -2,36 +2,35 @@
   description = "Pritam's declarative macOS system configuration with nix-darwin and Home Manager";
 
   inputs = {
-    # Package sets
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixpkgs-stable.url = "github:NixOS/nixpkgs/nixos-25.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
 
-    # Environment/system management
     darwin = {
       url = "github:nix-darwin/nix-darwin";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-    
+
     home-manager = {
       url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
+  outputs = { self, nixpkgs, darwin, home-manager, ... }@inputs:
     let
-      inherit (self.lib) attrValues makeOverridable optionalAttrs singleton;
+      system = "aarch64-darwin";
+      homeStateVersion = "25.11";
 
-      homeStateVersion = "25.05";
-
-      nixpkgsDefaults = {
-        config = {
-          allowUnfree = true;
-        };
-        overlays = attrValues self.overlays;
+      nixpkgsConfig = {
+        config.allowUnfree = true;
       };
+
+      overlays = [
+        (_: pkgs: {
+          nushell = pkgs.nushell.overrideAttrs (_: {
+            doCheck = false;
+          });
+        })
+      ];
 
       primaryUserDefaults = {
         username = "pritamkadam";
@@ -41,32 +40,15 @@
       };
     in
     {
-      # Add some additional functions to `lib`.
-      lib = inputs.nixpkgs-unstable.lib.extend (_: _: {
-        mkDarwinSystem = import ./lib/mkDarwinSystem.nix inputs;
-        lsnix = import ./lib/lsnix.nix;
-      });
-
-      overlays = {
-        pkgs-unstable = _: prev: {
-          pkgs-unstable = import inputs.nixpkgs-unstable {
-            inherit (prev.stdenv) system;
-            inherit (nixpkgsDefaults) config;
-          };
-        };
-      };
-
       darwinModules = {
         pritamkadam-bootstrap = import ./darwin/bootstrap.nix;
         pritamkadam-defaults = import ./darwin/defaults.nix;
         pritamkadam-general = import ./darwin/general.nix;
         pritamkadam-homebrew = import ./darwin/homebrew.nix;
-
         users-primaryUser = import ./modules/darwin/users.nix;
       };
 
       homeManagerModules = {
-        pritamkadam-config-files = import ./home/config-files.nix;
         pritamkadam-fish = import ./home/fish.nix;
         pritamkadam-nu = import ./home/nu.nix;
         pritamkadam-git = import ./home/git.nix;
@@ -75,7 +57,6 @@
         pritamkadam-packages = import ./home/packages.nix;
         pritamkadam-yabai = import ./home/yabai.nix;
         pritamkadam-borders = import ./home/borders.nix;
-
         home-user-info = { lib, ... }: {
           options.home.user-info =
             (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
@@ -83,36 +64,58 @@
       };
 
       darwinConfigurations = {
-        # Minimal macOS configurations to bootstrap systems
-        bootstrap-x86 = makeOverridable darwin.lib.darwinSystem {
-          system = "x86_64-darwin";
-          modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsDefaults; } ];
-        };
-        bootstrap-arm = self.darwinConfigurations.bootstrap-x86.override {
-          system = "aarch64-darwin";
+        # Minimal configuration for bootstrapping new systems
+        bootstrap = darwin.lib.darwinSystem {
+          modules = [
+            ./darwin/bootstrap.nix
+            { nixpkgs = nixpkgsConfig // { hostPlatform = system; inherit overlays; }; }
+          ];
         };
 
-        # My Apple Silicon macOS laptop config
-        MacBookPro = makeOverridable self.lib.mkDarwinSystem (primaryUserDefaults // {
-          modules = attrValues self.darwinModules ++ singleton {
-            nixpkgs = nixpkgsDefaults;
-            networking.computerName = "pritamkadam";
-            networking.hostName = "MacBookPro";
-            networking.knownNetworkServices = [
-              "Wi-Fi"
-              "USB 10/100/1000 LAN"
-            ];
-            nix.registry.my.flake = inputs.self;
-          };
-          inherit homeStateVersion;
-          system = "aarch64-darwin";
-          homeModules = attrValues self.homeManagerModules;
-        });
+        # Main Apple Silicon macOS laptop config
+        MacBookPro = darwin.lib.darwinSystem {
+          specialArgs = { inherit inputs; };
+          modules = builtins.attrValues self.darwinModules ++ [
+            home-manager.darwinModules.home-manager
+            ({ config, ... }:
+              let user = primaryUserDefaults; in
+              {
+                nixpkgs = nixpkgsConfig // { hostPlatform = system; inherit overlays; };
+
+                users.primaryUser = user;
+                system.primaryUser = user.username;
+                system.configurationRevision = self.rev or self.dirtyRev or null;
+
+                networking.computerName = "pritamkadam";
+                networking.hostName = "MacBookPro";
+                networking.knownNetworkServices = [
+                  "Wi-Fi"
+                  "USB 10/100/1000 LAN"
+                ];
+
+                nix.nixPath.nixpkgs = "${nixpkgs}";
+                nix.registry.my.flake = self;
+
+                users.users.${user.username}.home = "/Users/${user.username}";
+                home-manager = {
+                  useGlobalPkgs = true;
+                  useUserPackages = true;
+                  extraSpecialArgs = { inherit inputs; };
+                  users.${user.username} = {
+                    imports = builtins.attrValues self.homeManagerModules;
+                    home.stateVersion = homeStateVersion;
+                    home.user-info = config.users.primaryUser;
+                    manual.manpages.enable = false;
+                  };
+                };
+              })
+          ];
+        };
+      };
+
+      # Re-export nixpkgs with allowUnfree for `nix run my#package` etc.
+      legacyPackages.${system} = import nixpkgs (nixpkgsConfig // {
+        localSystem = { inherit system; };
+      });
     };
-  } // flake-utils.lib.eachDefaultSystem (system: {
-      # Re-export `nixpkgs-unstable` with overlays.
-      # This is handy in combination with setting `nix.registry.my.flake = inputs.self`.
-      # Allows doing things like `nix run my#prefmanager -- watch --all`
-      legacyPackages = import inputs.nixpkgs-unstable (nixpkgsDefaults // { inherit system; });
-  });
 }

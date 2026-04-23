@@ -13,21 +13,13 @@
           mouse_follows_focus         on           \
           focus_follows_mouse         autoraise    \
           window_placement            second_child \
-          window_topmost              off          \
           window_shadow               off          \
-          window_animation_duration   0.25         \
-          window_opacity_duration     0.25         \
-          active_window_opacity       0.95         \
-          normal_window_opacity       0.85         \
+          window_animation_duration   0.0          \
+          window_opacity_duration     0.0          \
+          active_window_opacity       1.0          \
+          normal_window_opacity       1.0          \
           window_opacity              off          \
           insert_feedback_color       0xaad75f5f   \
-          active_window_border_color  0xBF775759   \
-          normal_window_border_color  0x7f353535   \
-          window_border_width         4            \
-          window_border_radius        12           \
-          window_border_blur          on           \
-          window_border_hidpi         on           \
-          window_border               on           \
           split_ratio                 0.50         \
           split_type                  auto         \
           auto_balance                off          \
@@ -42,17 +34,6 @@
           mouse_action2               resize       \
           mouse_drop_action           swap
 
-      # Space labels
-      yabai -m space 1 --label 1
-      yabai -m space 2 --label 2
-      yabai -m space 3 --label 3
-      yabai -m space 4 --label 4
-      yabai -m space 5 --label 5
-      yabai -m space 6 --label 6
-      yabai -m space 7 --label 7
-      yabai -m space 8 --label 8
-      yabai -m space 9 --label 9
-
       # Unmanaged
       yabai -m rule --add label="1Password 7" app="^1Password 7$" manage=off
       yabai -m rule --add label="Zoom Workplace" app="^zoom.us$" manage=off
@@ -65,11 +46,11 @@
       yabai -m rule --add label="Preview" app="Preview" manage=off
       yabai -m rule --add label="Stickies" app="Stickies" manage=off
       yabai -m rule --add app="^System Settings$" manage=off
-      yabai -m rule --add app="^JetBrains Toolbox$" sticky=on layer=above manage=off
-      yabai -m rule --add app="^IntelliJ IDEA-EAP$" title="Preferences" sticky=on layer=above manage=off
-      yabai -m rule --add app="^IntelliJ IDEA$" title="Preferences" sticky=on layer=above manage=off
-      yabai -m rule --add app="^IntelliJ IDEA$" title="Settings" sticky=on layer=above manage=off
-      yabai -m rule --add app="Stats" sticky=on layer=above manage=off
+      yabai -m rule --add app="^JetBrains Toolbox$" sticky=on manage=off
+      yabai -m rule --add app="^IntelliJ IDEA-EAP$" title="Preferences" sticky=on manage=off
+      yabai -m rule --add app="^IntelliJ IDEA$" title="Preferences" sticky=on manage=off
+      yabai -m rule --add app="^IntelliJ IDEA$" title="Settings" sticky=on manage=off
+      yabai -m rule --add app="Stats" sticky=on manage=off
 
       # Browser
       yabai -m rule --add app="^Brave Browser Beta$" space=^1
@@ -105,9 +86,8 @@
       yabai -m rule --add app="^Microsoft Word$" space=^9
       yabai -m rule --add app="^Microsoft Outlook$" space=^9
 
-      # signals
-      yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
-      yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
+      # signals - removed window_destroyed race condition handler
+      # See: https://github.com/koekeishiya/yabai/issues/154
 
       # Sketchybar
       yabai -m signal --add event=window_focused action="sketchybar --trigger window_focus"

@@ -32,15 +32,11 @@
     AppleShowScrollBars = "Automatic";
     _HIHideMenuBar = true;
     
-    # Privacy and security
-    AppleShowAllExtensions = true;
+    # Print dialog defaults
     PMPrintingExpandedStateForPrint = true;
     PMPrintingExpandedStateForPrint2 = true;
   };
 
-  # Enhanced security and firewall configuration  
-  security.pam.services.sudo_local.touchIdAuth = true; # Enable Touch ID for sudo
-  
   system.defaults.SoftwareUpdate.AutomaticallyInstallMacOSUpdates = false; # Manual control over updates
   
   # Firewall configuration

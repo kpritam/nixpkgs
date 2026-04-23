@@ -7,20 +7,25 @@ let
 in
 
 {
+  # Hardcode brew env vars instead of eval "$(brew shellenv)" — avoids spawning brew on every shell start
   environment.shellInit = mkIf brewEnabled ''
-    eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
+    export HOMEBREW_PREFIX="${config.homebrew.prefix}"
+    export HOMEBREW_CELLAR="${config.homebrew.prefix}/Cellar"
+    export HOMEBREW_REPOSITORY="${config.homebrew.prefix}"
+    export PATH="${config.homebrew.prefix}/bin:${config.homebrew.prefix}/sbin:$PATH"
   '';
 
   # https://docs.brew.sh/Shell-Completion#configuring-completions-in-fish
   # For some reason if the Fish completions are added at the end of `fish_complete_path` they don't
   # seem to work, but they do work if added at the start.
+  # Use Nix-interpolated paths instead of (brew --prefix) subprocess calls — avoids ~6s of brew forks
   programs.fish.interactiveShellInit = mkIf brewEnabled ''
-    if test -d (brew --prefix)"/share/fish/completions"
-      set -p fish_complete_path (brew --prefix)/share/fish/completions
+    if test -d "${config.homebrew.prefix}/share/fish/completions"
+      set -p fish_complete_path ${config.homebrew.prefix}/share/fish/completions
     end
 
-    if test -d (brew --prefix)"/share/fish/vendor_completions.d"
-      set -p fish_complete_path (brew --prefix)/share/fish/vendor_completions.d
+    if test -d "${config.homebrew.prefix}/share/fish/vendor_completions.d"
+      set -p fish_complete_path ${config.homebrew.prefix}/share/fish/vendor_completions.d
     end
   '';
 
@@ -31,9 +36,6 @@ in
 
   homebrew.taps = [
     "coursier/formulas"
-    "homebrew/cask-fonts"
-    "homebrew/cask-versions"
-    "homebrew/services"
     "koekeishiya/formulae"
     "FelixKratz/formulae"
     "derailed/k9s"
@@ -57,15 +59,12 @@ in
     # Development Tools
     "jetbrains-toolbox" # JetBrains IDE manager
     "visual-studio-code@insiders" # VS Code Insiders
-    "visual-studio-code"
-    "zed@preview"       # Modern editor
     "fork"              # Git client
     "insomnia"          # API testing
     "orbstack"          # Docker alternative
     "dbeaver-enterprise" # Database tool
     "sf-symbols"        # Apple's SF Symbols
     "ghostty"           # Terminal emulator
-    "figma"
     
     # Browsers
     "google-chrome"
@@ -73,19 +72,14 @@ in
     
     # Media & Communication
     "vlc"               # Video player
-    "spotify"           # Music streaming
-    "discord"           # Communication
     "zoom"              # Video conferencing
     "tuple"             # Pair programming
     
     # Fonts
     "font-iosevka"      # Programming font
     "font-input"        # Programming font
+    "lm-studio"
     
-    # AI/ML Tools
-    "lm-studio"         # Local LLM runner
-
-    "espanso"
   ];
 
   # Configuration related to casks
@@ -115,18 +109,13 @@ in
     "asdf"              # Multi-language version manager
     "nvm"               # Node.js version manager
     
-    # Package Managers & Build Tools
-    "yarn"              # JavaScript package manager
-    
-    # System & Shell Tools
-    "tmux"              # Terminal multiplexer
+    # System & Shell Tools (tmux managed by nix-darwin programs.tmux)
     "skhd"              # Keybinding manager for yabai
     "yabai"             # Tiling window manager
     "borders"           # Window borders for yabai
     "sketchybar"        # Custom menu bar
     
     # Container & Cloud Tools
-    "colima"            # Docker Desktop alternative
     "docker-compose"    # Container orchestration
     "awscli"            # AWS command line
     
