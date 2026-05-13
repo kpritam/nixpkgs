@@ -3,8 +3,8 @@ set -euo pipefail
 
 nix flake update
 
-nix build .#darwinConfigurations.MacBookPro.system --no-warn-dirty
+nix build .#darwinConfigurations.MacBookPro.system
 
-sudo ./result/sw/bin/darwin-rebuild switch --flake .#MacBookPro --no-warn-dirty
+sudo ./result/sw/bin/darwin-rebuild switch --flake .#MacBookPro
 
 brew upgrade

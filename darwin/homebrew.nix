@@ -138,7 +138,9 @@ in
     "unixodbc"          # Database connectivity
 
     # AI/ML Tools
-    "sst/tap/opencode"
+    "anomalyco/tap/opencode"
+    "copilot-cli@prerelease"
+    "1password-cli"
     "lazygit"
   ];
 }
