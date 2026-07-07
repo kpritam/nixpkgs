@@ -45,6 +45,8 @@ in
   homebrew.casks = [
     # Security & Password Management
     "1password"
+    "1password-cli"
+    "copilot-cli@prerelease"
     "gpg-suite"
     
     # System Utilities
@@ -110,8 +112,8 @@ in
     "nvm"               # Node.js version manager
     
     # System & Shell Tools (tmux managed by nix-darwin programs.tmux)
-    "skhd"              # Keybinding manager for yabai
-    "yabai"             # Tiling window manager
+    "koekeishiya/formulae/skhd"   # Keybinding manager for yabai
+    "koekeishiya/formulae/yabai"  # Tiling window manager
     "borders"           # Window borders for yabai
     "sketchybar"        # Custom menu bar
     
@@ -139,8 +141,6 @@ in
 
     # AI/ML Tools
     "anomalyco/tap/opencode"
-    "copilot-cli@prerelease"
-    "1password-cli"
     "lazygit"
   ];
 }
