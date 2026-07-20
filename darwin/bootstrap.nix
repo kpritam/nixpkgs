@@ -34,12 +34,9 @@
     "/Users/${config.users.primaryUser.username}/.local/bin"
   ];
 
-  programs.tmux = {
-    enable = true;
-    enableFzf = true;
-    enableMouse = true;
-    enableVim = true;
-  };
+  # tmux itself is fully managed per-user via home-manager's
+  # programs.tmux (home/tmux.nix) to avoid double-managing /etc/tmux.conf
+  # alongside the user config.
 
   environment.variables.SHELL = "${pkgs.fish}/bin/fish";
 

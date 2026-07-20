@@ -30,6 +30,18 @@
             doCheck = false;
           });
         })
+        (_: pkgs: {
+          # starship's "notify" feature (notify-rust/mac-notification-sys) fails
+          # to link on aarch64-darwin with nixpkgs' bundled cctools ld ("Trace/BPT
+          # trap: 5" in cctools-binutils-darwin) - drop it, we don't use desktop
+          # notifications from the prompt anyway.
+          starship = pkgs.starship.overrideAttrs (old:
+            pkgs.lib.optionalAttrs pkgs.stdenv.hostPlatform.isDarwin {
+              cargoBuildFlags = (old.cargoBuildFlags or [ ]) ++ [ "--no-default-features" "--features" "battery" ];
+              doCheck = false;
+            }
+          );
+        })
       ];
 
       primaryUserDefaults = {
@@ -55,6 +67,7 @@
         pritamkadam-git-aliases = import ./home/git-aliases.nix;
         pritamkadam-gh-aliases = import ./home/gh-aliases.nix;
         pritamkadam-packages = import ./home/packages.nix;
+        pritamkadam-tmux = import ./home/tmux.nix;
         pritamkadam-yabai = import ./home/yabai.nix;
         pritamkadam-borders = import ./home/borders.nix;
         home-user-info = { lib, ... }: {

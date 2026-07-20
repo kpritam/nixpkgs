@@ -37,7 +37,10 @@ in
   homebrew.taps = [
     "coursier/formulas"
     "koekeishiya/formulae"
-    "FelixKratz/formulae"
+    # borders and sketchybar are listed as bare formula names below, so
+    # per-formula `trusted` (which only applies to fully-qualified names)
+    # doesn't cover them - trust must come from the tap itself.
+    { name = "FelixKratz/formulae"; trusted = true; }
     "derailed/k9s"
   ];
 
@@ -111,7 +114,7 @@ in
     "asdf"              # Multi-language version manager
     "nvm"               # Node.js version manager
     
-    # System & Shell Tools (tmux managed by nix-darwin programs.tmux)
+    # System & Shell Tools (tmux managed by home-manager programs.tmux)
     "koekeishiya/formulae/skhd"   # Keybinding manager for yabai
     "koekeishiya/formulae/yabai"  # Tiling window manager
     "borders"           # Window borders for yabai
