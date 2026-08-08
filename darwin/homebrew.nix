@@ -145,5 +145,6 @@ in
     # AI/ML Tools
     "anomalyco/tap/opencode"
     "lazygit"
+    "herdr"
   ];
 }
