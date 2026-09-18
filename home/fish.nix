@@ -65,6 +65,12 @@ in
     R = "radian";
     localip = "ipconfig getifaddr en0";
     tb = "toggle-background";
+
+    # Claude Code: `claude` uses the claude.ai subscription login (see
+    # interactiveShellInit override below, which runs after the 1Password
+    # plugin's own alias). `claude-key` opts into the 1Password-injected
+    # ANTHROPIC_API_KEY (pay-per-token API billing) instead.
+    ccop = "op plugin run -- claude";
   };
 
   # Configuration that should be above `loginShellInit` and `interactiveShellInit`.
@@ -95,5 +101,11 @@ in
     set -g fish_color_cancel       red       # color of the '^C' indicator on a canceled command
 
     source /Users/pritamkadam/.config/op/plugins.sh
+
+    # Override the 1Password plugin's `claude` alias (set above) so the bare
+    # `claude` command goes straight to the real binary, unauthenticated by
+    # 1Password, and instead uses the claude.ai subscription login from
+    # `claude /login`. Use `claude-key` for the API-key-billed path.
+    alias claude "command claude"
   '';
 }
